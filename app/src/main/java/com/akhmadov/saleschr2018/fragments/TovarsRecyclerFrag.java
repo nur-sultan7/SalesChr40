@@ -121,6 +121,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
             @Override
             public void onClick(int position) {
                 mainModelView.deleteFavouriteTovar(tovars.get(position).getUniqueId());
+
             }
         });
     }
