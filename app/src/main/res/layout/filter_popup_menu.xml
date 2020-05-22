@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:paddingBottom="40dp"
+    android:paddingTop="15dp"
+    android:background="@drawable/dialog_rounded"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/linear_layout_divider"
+        android:layout_gravity="center_horizontal"
+        android:showDividers="middle"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_check_blue_24dp"
+                android:id="@+id/check_new"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+              />
+
+            <TextView
+                android:id="@+id/filter_popup_menu_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/check_new"
+                android:layout_toRightOf="@+id/check_new"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="5dp"
+                android:text="Новинки"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_check_blue_24dp"
+                android:id="@+id/check_price_asc"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                />
+    <TextView
+        android:padding="5sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/filter_popup_menu_price_asc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/check_price_asc"
+        android:text="По возрастанию цены"
+        android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:layout_toEndOf="@+id/check_price_asc">
+
+    </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_check_blue_24dp"
+                android:id="@+id/check_price_desc"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                />
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/filter_popup_menu_price_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="По убыванию цены"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:layout_toRightOf="@+id/check_price_desc"
+        android:layout_toEndOf="@+id/check_price_desc" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_check_blue_24dp"
+                android:id="@+id/check_sale"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/filter_popup_menu_sale_asc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="По скидке"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_toRightOf="@+id/check_sale"
+            android:layout_toEndOf="@+id/check_sale" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

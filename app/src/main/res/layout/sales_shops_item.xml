@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <View
+            android:layout_width="fill_parent"
+
+
+            android:layout_height="1dp"
+
+            android:background="@color/iron"
+            android:id="@+id/view_iron_question"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_toRightOf="@+id/shop_image"
+            android:layout_toEndOf="@+id/shop_image">
+
+        </View>
+
+        <TextView
+            android:id="@+id/shop_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sdsffffffffffffffffdeededddedffffffdsd"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:ellipsize="end"
+            android:maxLines="1"
+
+
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/view_iron_question"
+            android:layout_alignStart="@+id/view_iron_question"
+             />
+
+        <TextView
+            android:id="@+id/location_name"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:text="sdsffffffffffffffffdeededddedffffffdsd"
+            android:textColor="@color/black"
+            android:ellipsize="end"
+            android:maxLines="1"
+
+
+            android:layout_alignBottom="@+id/shop_image"
+            android:layout_alignLeft="@+id/view_iron_question"
+            android:layout_alignStart="@+id/view_iron_question" />
+
+
+
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/shop_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/deep_blue"
+                  />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+

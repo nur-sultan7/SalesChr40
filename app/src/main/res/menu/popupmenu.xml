@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <item android:id="@+id/popup_menu_about"
+        android:title="@string/aboutshop"
+        android:icon="@drawable/ic_local_mall_black_24dp"/>
+    <item android:id="@+id/popup_menu_map"
+        android:title="@string/show_map"
+        android:icon="@drawable/ic_google_maps"/>
+    <item android:id="@+id/popup_menu_follow"
+        android:title="@string/follow"
+        android:icon="@drawable/follow"/>
+    <item android:id="@+id/popup_menu_unfollow"
+        android:title="@string/unfollow"
+        android:icon="@drawable/unfollow"/>
+
+
+</menu>

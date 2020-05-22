@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="icons_color">#999999</color>
+    <color name="primary">#E43F3F</color>
+    <color name="primary_dark">#E12929</color>
+    <color name="primary_darker">#CC1D1D</color>
+    <color name="accent">#000000</color>
+    <color name="gold">#FBC02D </color>
+    <color name="blue_corners">#0C61FE</color>
+    <color name="message_from_other">#E5E5EA</color>
+    <color name="message_from_me">#5C94FC</color>
+    <color name="feedback_background_color">#F4F4F4</color>
+    <color name="feedback_background_color_corner">#4486f4</color>
+    <color name="toolbar_color">#f7f7f7</color>
+    <color name="toolbar_elements_color">#999999</color>
+    <color name="background_text_view">#7E000000</color>
+
+
+    <color name="black">#000000</color>
+    <color name="black_transparent">#D9000000</color>
+    <color name="black_transparent_button">#66000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="blue">#2196F3</color>
+    <color name="deep_blue">#6299FE</color>
+    <color name="iron">#CCCCCC</color>
+    <color name = "Accepted">#E4EEFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="colorPrimary">#125688</color>
+    <color name="colorPrimary2">#1e72af</color>
+    <color name="colorPrimaryDark">#125688</color>
+    <color name="textColorPrimary">#ffffff</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#c8e8ff</color>
+
+    <color name="white_smoke">#efefef</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="main_color_green">#00b863</color>
+    <color name="main_color_gray_dk">#3b3b3b</color>
+    <color name="main_color_gray_lt">#acacac</color>
+    <color name="main_color_gray">#7d7d7d</color>
+    <color name="gray_light">#e8e8e8</color>
+    <color name="titlebackgroundcolor">#0000AA</color>
+</resources>
+
+
+

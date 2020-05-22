@@ -1,0 +1,155 @@
+package com.akhmadov.saleschr2018;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.os.Build;
+import android.os.Bundle;
+import android.transition.TransitionInflater;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TovarCardview extends AppCompatActivity {
+
+    ViewPager viewPager;
+   TovarCardviewViewPageAdapter adapter;
+    List<String> images;
+    String tovar_id;
+    ImageView left;
+    ImageView right;
+    FrameLayout frameLayout;
+
+
+
+    @SuppressLint("NewApi")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(Build.VERSION.SDK_INT>=21)
+        {
+            getWindow().setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(R.transition.tovar_image_transition));
+        }
+
+        setContentView(R.layout.activity_tovar_cardview);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        TextView name = findViewById(R.id.cardview_tovar_name);
+        TextView category = findViewById(R.id.cardview_tovar_category);
+        TextView old_cena = findViewById(R.id.tovar_cardview_old_price);
+        TextView new_cena = findViewById(R.id.tovar_cardview_new_price);
+        TextView skidka = findViewById(R.id.tovar_cardview_skidka);
+        TextView description = findViewById(R.id.cardview_tovar_description);
+
+        frameLayout = findViewById(R.id.tovar_cardview_viewpage_frame);
+        left = findViewById(R.id.left_nav);
+        left.setVisibility(View.INVISIBLE);
+        right = findViewById(R.id.right_nav);
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager.arrowScroll(View.FOCUS_LEFT);
+            }
+        });
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager.arrowScroll(View.FOCUS_RIGHT);
+            }
+        });
+
+
+        Intent intent = getIntent();
+        name.setText(intent.getExtras().getString("tovar_name"));
+        category.setText(intent.getExtras().getString("tovar_category"));
+        old_cena.setText(intent.getExtras().getString("old_cena"));
+        old_cena.setPaintFlags(old_cena.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+        new_cena.setText(intent.getExtras().getString("new_cena"));
+        skidka.setText(intent.getExtras().getString("skidka" )+ "%");
+        if (intent.getExtras().getString("tovar_description") == null)
+            {
+                //description.setText("Отличный тоыар новая модель!! Есть все размеры!! Все цвета !! Ограниченная серия");
+                description.setText("Отсутствует описание");
+            }
+        else
+            { description.setText(intent.getExtras().getString("tovar_description")); }
+
+        tovar_id = intent.getExtras().getString("id");
+        images = new ArrayList<>();
+        if (intent.getExtras().getString("image1")!=null)
+        images.add(intent.getExtras().getString("image1"));
+        if (intent.getExtras().getString("image2")!=null)
+        images.add(intent.getExtras().getString("image2"));
+        if (intent.getExtras().getString("image3")!=null)
+        images.add(intent.getExtras().getString("image3"));
+        if (images.size()<2)
+            right.setVisibility(View.INVISIBLE);
+
+        adapter = new TovarCardviewViewPageAdapter(images,intent.getExtras().getString("tovar_image"),this);
+        viewPager = findViewById(R.id.tovar_cardview_viewpage);
+        viewPager.setAdapter(adapter);
+        viewPager.setPadding(0,0,0,0);
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+         this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        int deviceheight = (int) (displaymetrics.heightPixels );
+
+        //if you need 4-5-6 anything fix imageview in height
+        //int deviceheight = displaymetrics.heightPixels / 3-10;
+        viewPager.getLayoutParams().height= (int) (deviceheight / 2.25);
+        frameLayout.getLayoutParams().height=(int) (deviceheight / 2.25);
+
+
+
+
+
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position<(adapter.getCount()-1)){
+
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+               toggleArrowVisibility(position == 0, position == images.size() - 1);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
+
+
+    }
+    public void toggleArrowVisibility(boolean isAtZeroIndex, boolean isAtLastIndex) {
+        if(isAtZeroIndex)
+            left.setVisibility(View.INVISIBLE);
+        else
+            left.setVisibility(View.VISIBLE);
+        if(isAtLastIndex)
+            right.setVisibility(View.INVISIBLE);
+        else
+            right.setVisibility(View.VISIBLE);
+
+    }
+
+
+}

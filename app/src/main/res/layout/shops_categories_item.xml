@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shops_categories_id"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+
+
+
+    cardview:cardCornerRadius="0sp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+
+
+        <ImageView
+            android:id="@+id/shops_categories_image"
+            android:layout_width="match_parent"
+            android:layout_height="260sp"
+          android:paddingTop="10dp"
+            android:paddingRight="15sp"
+            android:paddingLeft="15sp"
+            android:scaleType="centerCrop"
+
+            android:layout_marginTop="10sp"
+            android:cropToPadding="true"
+            />
+
+
+
+        <TextView
+            android:id="@+id/shops_categories_name"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:textAlignment="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black_transparent"
+            android:paddingStart="10sp"
+            android:paddingLeft="10sp"
+            android:paddingBottom="5sp"
+            android:text="Shop Name"
+            android:textStyle="bold"
+
+
+            android:textSize="18sp" />
+
+
+
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+

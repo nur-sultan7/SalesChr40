@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Скидки ЧР</string>
+    <string name="app_name2">Скидки ЧР</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shops">Магазины</string>
+    <string name="tovars">Товары</string>
+    <string name="favarit">Избранное</string>
+
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+
+    <!-- Change the following strings as required -->
+    <string name="back4app_app_id">jKwxD68Z3gnLHYD6rLIxliwiYknn2oxX79vW1lgq</string>
+    <string name="back4app_client_key">GeyODZ39CNbwQ1I7PAWDIyFO6LPusEg3jR3pubBw</string>
+
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="shops_list_empty">Магазины отсутствуют</string>
+    <string name="aboutshop">О магазине</string>
+    <string name="follow">Подписаться</string>
+    <string name="unfollow">Отписаться</string>
+    <string name="show_map">Показать на карте</string>
+    <string name="tovar_name">Tovar Name</string>
+    <string name="loading">Загрузка...</string>
+
+
+</resources>

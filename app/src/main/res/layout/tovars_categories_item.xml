@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15sp"
+
+    >
+    <ImageView
+        android:layout_marginLeft="2sp"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:id="@+id/tovars_category_img"
+        android:layout_marginStart="2sp" />
+    <TextView
+        android:id="@+id/tovars_category_name"
+        android:layout_marginLeft="15sp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tovar_name"
+        android:textSize="16sp"
+        android:layout_marginStart="15sp" />
+
+</LinearLayout>

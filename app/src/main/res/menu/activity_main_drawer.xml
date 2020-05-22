@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group >
+
+        <item
+            android:id="@+id/nav_shops"
+            android:icon="@drawable/shop_icons"
+            android:title="@string/shops" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_local_grocery_store_black_24dp"
+            android:title="@string/tovars" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/star"
+            android:title="@string/favarit" />
+    </group>
+
+    <item android:title="Обратная связь">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_new_releases_black_24dp"
+                android:title="Информация" />
+
+        </menu>
+    </item>
+
+</menu>

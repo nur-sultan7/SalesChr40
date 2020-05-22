@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ImageView
+    android:layout_width="130dp"
+    android:layout_height="130dp"
+    app:srcCompat="@drawable/sale_logo"
+    android:id="@+id/imageView4"
+    android:layout_marginBottom="15dp"
+    android:layout_above="@+id/textView3"
+    android:layout_centerHorizontal="true" />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+    android:text="Хотите добавить свой магазин ?"
+    android:id="@+id/textView3"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="сэйлс-манеджер: Имам"
+        android:id="@+id/textView223"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Разработчик: Ахмадов Н.А."
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:id="@+id/textView322"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Скажите в магазине, что нашли товар в приложении !"
+        android:textColor="@color/primary_dark"
+        android:fontFamily="sans-serif-condensed"
+
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:id="@+id/selsinf"
+        android:layout_marginBottom="64dp"
+        android:layout_above="@+id/textView322"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Для добавления магазина или получения консультации обращайтесь: "
+        android:textAlignment="center"
+
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="14dp"
+        android:layout_above="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/whats"
+        android:id="@+id/imageView3"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/textView32"
+        android:layout_toStartOf="@+id/textView32" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+7 928 940-84-93"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:id="@+id/textView32"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/imageView4"
+        android:layout_alignEnd="@+id/imageView4" />
+
+
+</RelativeLayout>
