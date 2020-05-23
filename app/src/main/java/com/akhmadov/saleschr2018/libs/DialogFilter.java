@@ -63,29 +63,21 @@ public class DialogFilter extends Dialog {
         this.show();
     }
     public void checkChoice(Integer orderId){
+        check_new.setVisibility(View.GONE);
+        check_price_asc.setVisibility(View.GONE);
+        check_price_desc.setVisibility(View.GONE);
+        check_sale.setVisibility(View.GONE);
         switch (orderId){
             case 0:
                 check_new.setVisibility(View.VISIBLE);
-                check_price_asc.setVisibility(View.GONE);
-                check_price_desc.setVisibility(View.GONE);
-                check_sale.setVisibility(View.GONE);
                 break;
             case 1:
-                check_new.setVisibility(View.GONE);
-                check_price_asc.setVisibility(View.GONE);
                 check_price_desc.setVisibility(View.VISIBLE);
-                check_sale.setVisibility(View.GONE);
                 break;
             case 2:
-                check_new.setVisibility(View.GONE);
                 check_price_asc.setVisibility(View.VISIBLE);
-                check_price_desc.setVisibility(View.GONE);
-                check_sale.setVisibility(View.GONE);
                 break;
             case 3:
-                check_new.setVisibility(View.GONE);
-                check_price_asc.setVisibility(View.GONE);
-                check_price_desc.setVisibility(View.GONE);
                 check_sale.setVisibility(View.VISIBLE);
                 break;
         }
