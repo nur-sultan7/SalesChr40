@@ -3,14 +3,14 @@
     xmlns:yourapp="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_info"
-        yourapp:showAsAction="always|collapseActionView"
+        yourapp:showAsAction="ifRoom|collapseActionView"
         android:title=""
 
         android:icon="@drawable/ic_info_black_24dp"
         />
     <item
         android:id="@+id/action_filter"
-        yourapp:showAsAction="always|collapseActionView"
+        yourapp:showAsAction="ifRoom|collapseActionView"
         android:title=""
         android:icon="@drawable/ic_up_and_down_arrows"
         />
@@ -18,7 +18,7 @@
     android:id="@+id/action_search"
     android:title="Поиск..."
     android:icon="@drawable/ic_search_toolbar_24dp"
-    yourapp:showAsAction="always|collapseActionView"
+    yourapp:showAsAction="ifRoom|collapseActionView"
     yourapp:actionViewClass="androidx.appcompat.widget.SearchView"
     />
 

@@ -100,17 +100,17 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                                 }
         );
         recyclerView = view.findViewById(R.id.tovars_recyclerview);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        adapter = new CategoryTovarsAdapter(recyclerView, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setItemViewCacheSize(12);
-        new RemoteDataTask().execute(0);
+
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        adapter = new CategoryTovarsAdapter(recyclerView, getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemViewCacheSize(12);
         adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {
             @Override
             public void onClick(int position) {
@@ -124,6 +124,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
 
             }
         });
+        new RemoteDataTask().execute(0);
     }
 
     @Override
