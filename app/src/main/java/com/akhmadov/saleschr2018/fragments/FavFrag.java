@@ -23,6 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.akhmadov.saleschr2018.DBHelper;
 import com.akhmadov.saleschr2018.R;
+import com.akhmadov.saleschr2018.data.Shop;
 import com.akhmadov.saleschr2018.data.Tovar;
 
 import java.util.ArrayList;
@@ -44,7 +45,6 @@ public class FavFrag extends Fragment implements ViewPager.OnPageChangeListener,
     ContentValues cv;
     ProgressBar progressBar;
     SwipeRefreshLayout swipeRefreshLayout;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -52,15 +52,6 @@ public class FavFrag extends Fragment implements ViewPager.OnPageChangeListener,
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SalesMianFrag.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FavFrag newInstance(String param1, String param2) {
         FavFrag fragment = new FavFrag();
         Bundle args = new Bundle();
@@ -108,7 +99,6 @@ View view =inflater.inflate(R.layout.activity_main_tovars, container, false);
      //   toolbar.setTitle("Избранные товары");
         progressBar = (ProgressBar) view.findViewById(R.id.tovars_fragment_progressBar) ;
         progressBar.setVisibility(View.VISIBLE);
-        // Inflate the layout for this fragment
         listView= (ListView) view.findViewById(R.id.tovars_category_recycler_view);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.shops_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);

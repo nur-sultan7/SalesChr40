@@ -20,7 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.akhmadov.saleschr2018.R;
-import com.akhmadov.saleschr2018.fragments.Shop;
+import com.akhmadov.saleschr2018.data.Shop;
 import com.akhmadov.saleschr2018.fragments.TovarsFrag;
 import com.parse.ParseException;
 import com.parse.ParseFile;

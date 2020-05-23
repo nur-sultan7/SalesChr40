@@ -1,92 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-<ImageView
-    android:layout_width="130dp"
-    android:layout_height="130dp"
-    app:srcCompat="@drawable/sale_logo"
-    android:id="@+id/imageView4"
-    android:layout_marginBottom="15dp"
-    android:layout_above="@+id/textView3"
-    android:layout_centerHorizontal="true" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:srcCompat="@drawable/sale_logo" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/wanna_add_shop"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="@string/wanna_add_shop_2"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:gravity="center_horizontal" />
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/whats" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/imageView3"
+                android:layout_toRightOf="@+id/imageView3"
+                android:text="@string/imam_phone_number"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView223"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sales_manager"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPhoneNumber" />
+
+        <TextView
+            android:id="@+id/selsinf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/say_you_from_us"
+
+            android:textAlignment="center"
+            android:textColor="@color/primary_dark"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView322"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView223"
+            android:gravity="center_horizontal" />
+
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-    android:text="Хотите добавить свой магазин ?"
-    android:id="@+id/textView3"
-        android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="сэйлс-манеджер: Имам"
-        android:id="@+id/textView223"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:layout_below="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Разработчик: Ахмадов Н.А."
-        android:textColor="@color/black"
-        android:textSize="16sp"
         android:id="@+id/textView322"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Скажите в магазине, что нашли товар в приложении !"
-        android:textColor="@color/primary_dark"
-        android:fontFamily="sans-serif-condensed"
-
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:id="@+id/selsinf"
-        android:layout_marginBottom="64dp"
-        android:layout_above="@+id/textView322"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:text="Для добавления магазина или получения консультации обращайтесь: "
-        android:textAlignment="center"
-
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="14dp"
-        android:layout_above="@+id/imageView3"
-        android:layout_centerHorizontal="true" />
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/whats"
-        android:id="@+id/imageView3"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView32"
-        android:layout_toStartOf="@+id/textView32" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+7 928 940-84-93"
+        android:layout_marginBottom="72dp"
+        android:text="@string/developer_name"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:id="@+id/textView32"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/imageView4"
-        android:layout_alignEnd="@+id/imageView4" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</RelativeLayout>

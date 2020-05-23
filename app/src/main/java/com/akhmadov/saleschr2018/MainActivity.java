@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity
         tovarsFrag = new TavarsCategories();
         favFrag = new FavFrag();
         information = new Information();
-
-
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container,shopsCategoriesFragment);
         fragmentTransaction.commit();

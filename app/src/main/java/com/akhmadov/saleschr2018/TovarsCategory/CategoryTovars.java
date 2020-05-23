@@ -71,12 +71,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
           cat_name=getArguments().getString("cat_name");
         }
 
-            filter_dialog=new DialogFilter(requireContext());
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity() , 2));
-        //listView.addItemDecoration( new LayoutMarginDecoration( 2, 10 ) );
-        adapter = new CategoryTovarsAdapter(recyclerView,this.getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setItemViewCacheSize(12);
+        filter_dialog=new DialogFilter(requireContext());
     }
 
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater)
@@ -186,8 +181,11 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                                 }
         );
         recyclerView= view.findViewById(R.id.tovars_recyclerview);
-
-
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity() , 2));
+        //listView.addItemDecoration( new LayoutMarginDecoration( 2, 10 ) );
+        adapter = new CategoryTovarsAdapter(recyclerView,this.getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemViewCacheSize(12);
         new RemoteDataTask().execute(orderBy);
         return view;
     }

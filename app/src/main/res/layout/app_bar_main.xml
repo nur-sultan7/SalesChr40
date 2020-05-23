@@ -10,25 +10,17 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         android:background="@android:color/white"
         >
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:elevation="0dp"
-
-
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways"
-
-
             android:background="@drawable/toolbar_rounded"
             app:titleTextColor="@color/toolbar_elements_color"
             app:titleTextAppearance="@style/Toolbar.TitleText"
-
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

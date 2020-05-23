@@ -1,4 +1,4 @@
-package com.akhmadov.saleschr2018.fragments;
+package com.akhmadov.saleschr2018.data;
 
 /**
  * Created by Akhmadov on 02.10.2017.

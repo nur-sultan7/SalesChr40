@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.akhmadov.saleschr2018.R;
+import com.akhmadov.saleschr2018.data.Shop;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
