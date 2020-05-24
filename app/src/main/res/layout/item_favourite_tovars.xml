@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewFavouriteTovar"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
+            android:background="@color/aluminum"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textViewFavoriteTovarSkidka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#E43F3F"
+            android:padding="2sp"
+            android:text="20%"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewFavouriteTovar"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewFavouriteTovar"
+            app:layout_constraintHorizontal_bias="0.407"
+            app:layout_constraintStart_toEndOf="@+id/imageViewFavouriteTovar"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/textViewFavouriteTovarName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/tovar_name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toEndOf="@+id/textViewFavoriteTovarSkidka"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewFavouriteTovarCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Tovar Category"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toEndOf="@+id/textViewFavoriteTovarSkidka"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFavouriteTovarName" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.81" />
+
+        <com.like.LikeButton
+            android:id="@+id/likeButtonFavouriteTovar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:foregroundGravity="center"
+            android:scaleType="fitCenter"
+            app:anim_scale_factor="0.5"
+            app:icon_size="27dp"
+            app:icon_type="heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewFavoriteTovarSkidka">
+
+            <TextView
+                android:id="@+id/textViewFavouriteTovarOldCena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="18 000"
+                android:textColor="#2d2d2d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewFavouriteTovarNewCena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@+id/textViewFavouriteTovarOldCena"
+                android:layout_toRightOf="@+id/textViewFavouriteTovarOldCena"
+                android:text="15 000 руб."
+                android:textColor="#2d2d2d"
+                android:textSize="18sp"
+                android:textStyle="bold
+" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

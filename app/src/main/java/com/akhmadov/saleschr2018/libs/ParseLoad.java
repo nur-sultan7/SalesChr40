@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParseLoad {
-    public static List<Tovar> RetrievingTovars(List<ParseObject> ob)
+
+    public static List<Tovar> RetrievingTovars( List<ParseObject> ob)
     {
+
         List<Tovar> tovars=new ArrayList<>();
         for (final ParseObject tovar_parse : ob) {
             final Tovar tovar = new Tovar();
@@ -38,6 +40,7 @@ public class ParseLoad {
             tovar.setName(tovar_parse.getString("tovar_opisanie"));
             tovar.setShop_id(tovar_parse.getString("shop_id"));
             tovar.setShop_object( tovar_parse.getParseObject("shop_object"));
+            tovar.setId_tovar(tovar_parse.getObjectId());
             tovars.add(tovar);
         }
         return tovars;

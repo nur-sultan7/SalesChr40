@@ -38,22 +38,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:text="@string/wanna_add_shop_2"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            android:gravity="center_horizontal" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/wanna_add_shop_2"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <RelativeLayout
+    <RelativeLayout
             android:id="@+id/relativeLayoutPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,32 +84,36 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView223"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sales_manager"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPhoneNumber" />
+    <TextView
+        android:id="@+id/textView223"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sales_manager"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutPhoneNumber" />
 
-        <TextView
-            android:id="@+id/selsinf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/say_you_from_us"
+    <TextView
+        android:id="@+id/selsinf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
 
-            android:textAlignment="center"
-            android:textColor="@color/primary_dark"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView322"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView223"
-            android:gravity="center_horizontal" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_horizontal"
+        android:text="@string/say_you_from_us"
+        android:textAlignment="center"
+        android:textColor="@color/primary_dark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView322"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView223" />
 
     <TextView
         android:id="@+id/textView322"

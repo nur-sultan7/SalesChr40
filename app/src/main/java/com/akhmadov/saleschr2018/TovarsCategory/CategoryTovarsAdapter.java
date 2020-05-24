@@ -20,9 +20,10 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.akhmadov.saleschr2018.ImageLoader;
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.TovarCardview;
+import com.akhmadov.saleschr2018.data.FavouriteTovar;
+import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Tovar;
 import com.akhmadov.saleschr2018.libs.ILoadMore;
 import com.like.LikeButton;
@@ -43,8 +44,11 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private boolean isloading;
     private int visibleTreshold=4;
     private int visibleLastitem, totalItemCount;
+
     private OnLikeClickListener onLikeClickListener;
     private OnUnLikeClickListener onUnLikeClickListener;
+
+    private MainModelView mainModelView;
 
 
     public void setOnLikeClickListener(OnLikeClickListener onLikeClickListener) {
@@ -63,9 +67,9 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         void onClick(int position);
     }
 
- public CategoryTovarsAdapter(RecyclerView recyclerView, Context mContext) {
+ public CategoryTovarsAdapter(MainModelView mainModelView,RecyclerView recyclerView, Context mContext) {
         this.mContext = mContext;
-
+        this.mainModelView = mainModelView;
      DisplayMetrics displaymetrics = new DisplayMetrics();
       ((Activity) mContext).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
       deviceh = (int) (displaymetrics.heightPixels / 2.25);
@@ -121,7 +125,7 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        ImageLoader imageLoader = new ImageLoader(mContext);
+
         if (holder instanceof MyViewHolder) {
             final Tovar tovar = mData.get(position);
             final MyViewHolder myViewHolder = (MyViewHolder) holder;
@@ -145,6 +149,11 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             //if you need same height as width you can set devicewidth in holder.image_view.getLayoutParams().height
             //   holder.tovar_image.getLayoutParams().height = deviceheight;
             //imageLoader.DisplayImage(mData.get(position).getImage(), holder.tovar_image);
+            FavouriteTovar favouriteTovar = mainModelView.getFavouriteTovarById(tovar.getId_tovar());
+            if (favouriteTovar!=null)
+                myViewHolder.likeButton.setLiked(true);
+            else
+                myViewHolder.likeButton.setLiked(false);
             myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -217,8 +226,8 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             likeButton.setUnlikeDrawableRes(R.drawable.heart);
             likeButton.setLikeDrawableRes(R.drawable.heart_2);
             tovar_category = itemView.findViewById(R.id.tovar_r_category);
-            new_cena = itemView.findViewById(R.id.tovar_r_new_cena);
-            old_cena = itemView.findViewById(R.id.tovar_r_old_cena);
+            new_cena = itemView.findViewById(R.id.textViewFavouriteTovarNewCena);
+            old_cena = itemView.findViewById(R.id.textViewFavouriteTovarOldCena);
             skidka = itemView.findViewById(R.id.tovar_r_skidka);
             likeButton.setOnLikeListener(new OnLikeListener() {
                 @Override

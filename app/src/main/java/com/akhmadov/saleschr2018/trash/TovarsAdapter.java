@@ -1,4 +1,4 @@
-package com.akhmadov.saleschr2018.fragments;
+package com.akhmadov.saleschr2018.trash;
 
 import android.content.ContentValues;
 import android.content.Context;

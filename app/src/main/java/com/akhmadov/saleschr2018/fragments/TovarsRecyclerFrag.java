@@ -73,6 +73,8 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
     private String search_str = "";
     private MainModelView mainModelView;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         View view = inflater.inflate(R.layout.all_tovars_recycler, container, false);
         progressBar = view.findViewById(R.id.tovars_fragment_progressBar);
 
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         String strtext = getArguments().getString("shop");
         shop_id = getArguments().getString("shop_id");
         shop_name = getArguments().getString("shop");
@@ -100,31 +102,33 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                                 }
         );
         recyclerView = view.findViewById(R.id.tovars_recyclerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        adapter = new CategoryTovarsAdapter(mainModelView,recyclerView, getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemViewCacheSize(12);
+        adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {
+            @Override
+            public void onClick(int position) {
+                Tovar tovar = tovars.get(position);
+                tovar.setIs_fav(true);
+                mainModelView.insertFavouriteTovar(tovar);
+            }
+        });
+        adapter.setOnUnLikeClickListener(new CategoryTovarsAdapter.OnUnLikeClickListener() {
+            @Override
+            public void onClick(int position) {
+                mainModelView.deleteFavouriteTovar(tovars.get(position).getId_tovar());
 
+            }
+        });
+        new RemoteDataTask().execute(0);
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        adapter = new CategoryTovarsAdapter(recyclerView, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setItemViewCacheSize(12);
-        adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {
-            @Override
-            public void onClick(int position) {
-                mainModelView.insertFavouriteTovar(tovars.get(position));
-            }
-        });
-        adapter.setOnUnLikeClickListener(new CategoryTovarsAdapter.OnUnLikeClickListener() {
-            @Override
-            public void onClick(int position) {
-                mainModelView.deleteFavouriteTovar(tovars.get(position).getUniqueId());
 
-            }
-        });
-        new RemoteDataTask().execute(0);
     }
 
     @Override
@@ -133,6 +137,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         setHasOptionsMenu(true);
         filter_dialog = new DialogFilter(requireContext());
         mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
+      ;
     }
 
     public void onCreateOptionsMenu(@NonNull Menu menu, final MenuInflater inflater) {
@@ -355,6 +360,9 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                 }
             }
             tovars = ParseLoad.RetrievingTovars(ob);
+
+
+
             return null;
         }
 

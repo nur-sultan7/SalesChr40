@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Tovar.class, FavouriteTovar.class}, version = 1, exportSchema = false)
+@Database(entities = {Tovar.class, FavouriteTovar.class}, version = 6, exportSchema = false)
 public abstract class TovarsDatabase extends RoomDatabase {
     private static TovarsDatabase database;
     private static final String DB_NAME="tovars_db";

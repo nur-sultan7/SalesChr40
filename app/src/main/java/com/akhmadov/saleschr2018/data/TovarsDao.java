@@ -10,10 +10,13 @@ import java.util.List;
 public interface TovarsDao {
 
     @Insert
-    void insertFavouriteTovar(Tovar tovar);
+    void insertFavouriteTovar(FavouriteTovar tovar);
 
-    @Query( "Delete from favourite_tovars where uniqueId==:id" )
-    void deleteFavouriteTovar(int id);
+    @Query( "Delete from favourite_tovars where id_tovar LIKE :id" )
+    void deleteFavouriteTovar(String id);
+
+   @Query("SELECT * FROM favourite_tovars WHERE id_tovar LIKE :id_tovar")
+    FavouriteTovar getFavouriteTovarById(String id_tovar);
 
     @Query("Select * from favourite_tovars")
     List<FavouriteTovar> getAllFavourite();

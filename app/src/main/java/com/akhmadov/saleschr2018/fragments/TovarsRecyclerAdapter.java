@@ -103,6 +103,8 @@ public class TovarsRecyclerAdapter extends RecyclerView.Adapter<TovarsRecyclerAd
 
         //if you need same height as width you can set devicewidth in holder.image_view.getLayoutParams().height
      //   holder.tovar_image.getLayoutParams().height = deviceheight;
+        if (tovar.isIs_fav())
+
 
 
 
@@ -173,8 +175,8 @@ public class TovarsRecyclerAdapter extends RecyclerView.Adapter<TovarsRecyclerAd
             likeButton.setUnlikeDrawableRes(R.drawable.heart);
             likeButton.setLikeDrawableRes(R.drawable.heart_2);
             tovar_category = itemView.findViewById(R.id.tovar_r_category);
-            new_cena = itemView.findViewById(R.id.tovar_r_new_cena);
-            old_cena = itemView.findViewById(R.id.tovar_r_old_cena);
+            new_cena = itemView.findViewById(R.id.textViewFavouriteTovarNewCena);
+            old_cena = itemView.findViewById(R.id.textViewFavouriteTovarOldCena);
             skidka = itemView.findViewById(R.id.tovar_r_skidka);
             likeButton.setOnLikeListener(new OnLikeListener() {
                 @Override

@@ -1,4 +1,4 @@
-package com.akhmadov.saleschr2018.fragments;
+package com.akhmadov.saleschr2018.trash;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by Akhmadov on 15.10.2017.
  */
-
+//////NOT USE////
 public class FavAdapter extends BaseAdapter implements Filterable {
 
     // Declare Variables

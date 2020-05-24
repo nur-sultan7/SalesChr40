@@ -14,8 +14,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.akhmadov.saleschr2018.FavouriteCategory.FavouriteTovars;
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.Shop;
+import com.akhmadov.saleschr2018.trash.FavAdapter;
 
 import java.util.List;
 
@@ -58,8 +60,8 @@ public class Information  extends Fragment {
      * @return A new instance of fragment SalesMianFrag.
      */
     // TODO: Rename and change types and number of parameters
-    public static FavFrag newInstance(String param1, String param2) {
-        FavFrag fragment = new FavFrag();
+    public static FavouriteTovars newInstance(String param1, String param2) {
+        FavouriteTovars fragment = new FavouriteTovars();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

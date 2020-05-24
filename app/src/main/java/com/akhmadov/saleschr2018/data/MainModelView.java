@@ -32,17 +32,26 @@ public class MainModelView extends AndroidViewModel {
     {
         new InsertFavouriteTovar().execute(tovar);
     }
-    public void deleteFavouriteTovar(Integer id)
+    public void deleteFavouriteTovar(String id)
     {
         new DeleteFavouriteTovar().execute(id);
+    }
+    public FavouriteTovar getFavouriteTovarById(String id){
+        try {
+            return new GetFavoriteByID().execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static class GetAllFavouriteTovars extends AsyncTask<Void,Void, List<FavouriteTovar>>
     {
         @Override
         protected List<FavouriteTovar> doInBackground(Void... voids) {
-            List<FavouriteTovar> favouriteTovarList = database.tovarsDao().getAllFavourite();
-            return favouriteTovarList;
+            return database.tovarsDao().getAllFavourite();
         }
     }
     private static class InsertFavouriteTovar extends AsyncTask<Tovar, Void,Void>
@@ -50,20 +59,35 @@ public class MainModelView extends AndroidViewModel {
 
         @Override
         protected Void doInBackground(Tovar... tovars) {
-            if (tovars[0]!=null)
-                database.tovarsDao().insertFavouriteTovar(tovars[0]);
+            if (tovars[0]!=null) {
+                FavouriteTovar favouriteTovar = new FavouriteTovar(tovars[0]);
+                database.tovarsDao().insertFavouriteTovar(favouriteTovar);
+            }
             return null;
         }
     }
 
-    private static class DeleteFavouriteTovar extends AsyncTask<Integer, Void, Void>
+    private static class DeleteFavouriteTovar extends AsyncTask<String, Void, Void>
     {
 
         @Override
-        protected Void doInBackground(Integer... integers) {
+        protected Void doInBackground(String... integers) {
             if (integers[0]!=null)
                 database.tovarsDao().deleteFavouriteTovar(integers[0]);
             return null;
+        }
+    }
+
+   private static class  GetFavoriteByID extends AsyncTask< String, Void, FavouriteTovar>
+    {
+        @Override
+        protected FavouriteTovar doInBackground(String... strings) {
+            FavouriteTovar favouriteTovar = null;
+            if (strings[0]!=null) {
+                String ss= strings[0];
+                favouriteTovar = database.tovarsDao().getFavouriteTovarById(ss);
+            }
+            return favouriteTovar;
         }
     }
 

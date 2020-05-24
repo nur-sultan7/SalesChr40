@@ -12,7 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.akhmadov.saleschr2018.TovarsCategory.TavarsCategories;
-import com.akhmadov.saleschr2018.fragments.FavFrag;
+import com.akhmadov.saleschr2018.FavouriteCategory.FavouriteTovars;
 import com.akhmadov.saleschr2018.fragments.Information;
 import com.akhmadov.saleschr2018.fragments.ShopsCategoriesFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
    // SalesMianFrag sales_main;
     ShopsCategoriesFragment shopsCategoriesFragment;
     TavarsCategories tovarsFrag;
-    FavFrag favFrag;
+    FavouriteTovars favFrag;
     Information information;
     Toolbar toolbar;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         shopsCategoriesFragment = new ShopsCategoriesFragment();
        // sales_main = new SalesMianFrag();
         tovarsFrag = new TavarsCategories();
-        favFrag = new FavFrag();
+        favFrag = new FavouriteTovars();
         information = new Information();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container,shopsCategoriesFragment);

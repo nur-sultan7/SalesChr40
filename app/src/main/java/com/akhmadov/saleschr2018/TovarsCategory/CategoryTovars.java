@@ -16,11 +16,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.akhmadov.saleschr2018.R;
+import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Tovar;
 import com.akhmadov.saleschr2018.libs.DialogFilter;
 import com.akhmadov.saleschr2018.libs.ILoadMore;
@@ -50,6 +52,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
     private int orderBy=0;
     private DialogFilter filter_dialog;
     private String search_str="";
+    private MainModelView mainModelView;
 
 
 
@@ -70,8 +73,8 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
           cat_id=getArguments().getString("cat_id");
           cat_name=getArguments().getString("cat_name");
         }
-
         filter_dialog=new DialogFilter(requireContext());
+        mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
     }
 
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater)
@@ -183,7 +186,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         recyclerView= view.findViewById(R.id.tovars_recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity() , 2));
         //listView.addItemDecoration( new LayoutMarginDecoration( 2, 10 ) );
-        adapter = new CategoryTovarsAdapter(recyclerView,this.getContext());
+        adapter = new CategoryTovarsAdapter(mainModelView,recyclerView,this.getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setItemViewCacheSize(12);
         new RemoteDataTask().execute(orderBy);

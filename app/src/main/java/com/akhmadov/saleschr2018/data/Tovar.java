@@ -26,7 +26,7 @@ public class Tovar {
     private String new_cena;
     private String old_cena;
     private String created_at;
-    private boolean is_fav;
+    private boolean is_fav = false;
     private String shop_name;
     private String shop_id;
 
