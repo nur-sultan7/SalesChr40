@@ -189,6 +189,21 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         adapter = new CategoryTovarsAdapter(mainModelView,recyclerView,this.getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setItemViewCacheSize(12);
+        adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {
+            @Override
+            public void onClick(int position) {
+                Tovar tovar = tovars.get(position);
+                tovar.setIs_fav(true);
+                mainModelView.insertFavouriteTovar(tovar);
+            }
+        });
+        adapter.setOnUnLikeClickListener(new CategoryTovarsAdapter.OnUnLikeClickListener() {
+            @Override
+            public void onClick(int position) {
+                mainModelView.deleteFavouriteTovar(tovars.get(position).getId_tovar());
+
+            }
+        });
         new RemoteDataTask().execute(orderBy);
         return view;
     }
