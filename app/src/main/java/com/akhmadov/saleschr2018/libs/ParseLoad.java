@@ -33,8 +33,8 @@ public class ParseLoad {
                 tovar.setDescription(tovar_parse.getString("tovar_description"));
             }
             tovar.setCategory(String.valueOf(tovar_parse.get("tovar_name")));
-            tovar.setSkidka(String.valueOf(tovar_parse.get("skidka")));
-            tovar.setNew_cena(String.valueOf(tovar_parse.get("new_price")));
+            tovar.setSkidka(tovar_parse.getInt("skidka"));
+            tovar.setNew_cena(tovar_parse.getInt("new_price"));
             tovar.setOld_cena(tovar_parse.getString("tovar_old_price"));
             tovar.setId_tovar(tovar_parse.getObjectId());
             tovar.setName(tovar_parse.getString("tovar_opisanie"));

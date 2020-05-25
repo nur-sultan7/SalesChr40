@@ -75,7 +75,7 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
                 //.centerCrop()
                 .into(holder.tovar_image);
         holder.old_cena.setText(tovar.getOld_cena());
-        holder.new_cena.setText(tovar.getNew_cena());
+        holder.new_cena.setText(String.valueOf(tovar.getNew_cena()));
         holder.tovar_category.setText(tovar.getCategory());
         holder.skidka.setText(tovar.getSkidka() + "%");
         holder.old_cena.setPaintFlags(holder.old_cena.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

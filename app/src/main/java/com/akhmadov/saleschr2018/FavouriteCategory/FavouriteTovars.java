@@ -28,6 +28,7 @@ import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Shop;
 import com.akhmadov.saleschr2018.data.Tovar;
+import com.akhmadov.saleschr2018.libs.DialogFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,10 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
 
     private String mParam1;
     private String mParam2;
+    private DialogFilter filter_dialog;
+
+    private static String orderBy;
+    private static int checkChoice;
 
 
     public static FavouriteTovars newInstance(String param1, String param2) {
@@ -72,11 +77,72 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         }
         mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
         adapter = new FavouriteTovarsAdapter();
+        filter_dialog = new DialogFilter(requireContext());
+        filter_dialog.price_asc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkChoice=2;
+               setFavouriteByOrder("new_cena ASC");
+            }
+        });
+        filter_dialog.price_desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkChoice=1;
+                setFavouriteByOrder("new_cena DESC");
+            }
+        });
+        filter_dialog.skidka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkChoice=3;
+                setFavouriteByOrder("skidka DESC");
+
+            }
+        });
+        filter_dialog.by_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkChoice=0;
+                setFavouriteByOrder("uniqueId DESC");
+            }
+        });
+        orderBy="uniqueId DESC";
+        checkChoice=0;
+    }
+    private void setFavouriteByOrder(String orderBy)
+    {
+        FavouriteTovars.orderBy =orderBy;
+        tovars.clear();
+        tovars.addAll(mainModelView.getFavouriteTovars(orderBy));
+        adapter.setFavouriteTovarsList(tovars);
+        filter_dialog.dismiss();
     }
 
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem searchViewItem = menu.findItem(R.id.action_search);
+        MenuItem info = menu.findItem(R.id.action_info);
+        info.setVisible(false);
+        final MenuItem filter = menu.findItem(R.id.action_filter);
+
+        MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                filter.setVisible(false);
+                return true;
+            }
+
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                getActivity().invalidateOptionsMenu ();
+              //  search_str = "";
+                setFavouriteByOrder(orderBy);
+                return true;
+            }
+        });
+
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
         searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -95,11 +161,27 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+       switch(item.getItemId())
+        {
+            case R.id.action_filter:
+                filter_dialog.showDialogFilter();
+                filter_dialog.checkChoice(checkChoice);
+                break;
+            default:
+                break;
+
+        }
+        return true;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.all_tovars_recycler, container, false);
-        final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Избранные товары");
         progressBar =  view.findViewById(R.id.tovars_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -128,6 +210,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
             }
         });
       //  new RemoteDataTask().execute();
+
         return view;
 
     }
@@ -138,9 +221,9 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         progressBar.setVisibility(View.GONE);
         //swipeRefreshLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setRefreshing(false);
-        List<Tovar> results = new ArrayList<>();
-        results.addAll(mainModelView.getFavouriteTovars());
-        adapter.setFavouriteTovarsList(results);
+        tovars = new ArrayList<>();
+        tovars.addAll(mainModelView.getFavouriteTovars(orderBy));
+        adapter.setFavouriteTovarsList(tovars);
     }
 
 
@@ -151,11 +234,12 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
     }
 
 
-   public class RemoteDataTask extends AsyncTask<Void, Void, List<Tovar>> {
+   public class RemoteDataTask extends AsyncTask<String, Void, List<Tovar>> {
         @Override
-        protected List<Tovar> doInBackground(Void... params) {
+        protected List<Tovar> doInBackground(String... params) {
            List<Tovar> results = new ArrayList<>();
-           results.addAll(mainModelView.getFavouriteTovars());
+           orderBy=params[0];
+           results.addAll(mainModelView.getFavouriteTovars(orderBy));
            return results;
         }
 
@@ -167,6 +251,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         }
 
         protected void onPostExecute(List<Tovar> result) {
+
             adapter.setFavouriteTovarsList(result);
         }
 

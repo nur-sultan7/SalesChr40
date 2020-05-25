@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -17,10 +18,10 @@ public class MainModelView extends AndroidViewModel {
         database = TovarsDatabase.getInstance(application);
     }
 
-    public List<FavouriteTovar> getFavouriteTovars()
+    public List<FavouriteTovar> getFavouriteTovars(String orderBy)
     {
         try {
-            return new GetAllFavouriteTovars().execute().get();
+            return new GetAllFavouriteTovars().execute(orderBy).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -47,11 +48,16 @@ public class MainModelView extends AndroidViewModel {
         return null;
     }
 
-    private static class GetAllFavouriteTovars extends AsyncTask<Void,Void, List<FavouriteTovar>>
+    private class GetAllFavouriteTovars extends AsyncTask< String,Void, List<FavouriteTovar>>
     {
         @Override
-        protected List<FavouriteTovar> doInBackground(Void... voids) {
-            return database.tovarsDao().getAllFavourite();
+        protected List<FavouriteTovar> doInBackground(String... voids) {
+           List<FavouriteTovar> favouriteTovarList=null;
+            if (voids[0] !=null) {
+                String query ="SELECT * FROM favourite_tovars ORDER BY " + voids[0];
+                favouriteTovarList = database.tovarsDao().getAllFavourite2(new SimpleSQLiteQuery(query));
+            }
+            return favouriteTovarList;
         }
     }
     private static class InsertFavouriteTovar extends AsyncTask<Tovar, Void,Void>

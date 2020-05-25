@@ -16,8 +16,6 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:animateLayoutChanges="@bool/is_right_to_left"
-
-
         >
     </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

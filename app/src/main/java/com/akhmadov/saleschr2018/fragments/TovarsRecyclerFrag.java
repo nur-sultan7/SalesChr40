@@ -136,6 +136,34 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         filter_dialog = new DialogFilter(requireContext());
+        filter_dialog.price_asc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new RemoteDataTask().execute(2);
+                filter_dialog.dismiss();
+            }
+        });
+        filter_dialog.price_desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new RemoteDataTask().execute(1);
+                filter_dialog.dismiss();
+            }
+        });
+        filter_dialog.skidka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new RemoteDataTask().execute(3);
+                filter_dialog.dismiss();
+            }
+        });
+        filter_dialog.by_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new RemoteDataTask().execute(0);
+                filter_dialog.dismiss();
+            }
+        });
         mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
       ;
     }
@@ -150,15 +178,15 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                // filterViewItem.setVisible(false);
-                infoViewItem.setVisible(false);
+               filterViewItem.setVisible(false);
+               infoViewItem.setVisible(false);
                 return true;
             }
 
+
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                // filterViewItem.setVisible(true);
-                infoViewItem.setVisible(true);
+                getActivity().invalidateOptionsMenu ();
                 search_str = "";
                 new RemoteDataTask().execute(orderBy);
                 return true;
@@ -194,34 +222,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
             case R.id.action_filter:
                 filter_dialog.showDialogFilter();
                 filter_dialog.checkChoice(orderBy);
-                filter_dialog.price_asc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new RemoteDataTask().execute(2);
-                        filter_dialog.dismiss();
-                    }
-                });
-                filter_dialog.price_desc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new RemoteDataTask().execute(1);
-                        filter_dialog.dismiss();
-                    }
-                });
-                filter_dialog.skidka.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new RemoteDataTask().execute(3);
-                        filter_dialog.dismiss();
-                    }
-                });
-                filter_dialog.by_new.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new RemoteDataTask().execute(0);
-                        filter_dialog.dismiss();
-                    }
-                });
+
                 break;
             default:
                 break;

@@ -22,8 +22,8 @@ public class Tovar {
     private String big_image;
     private String big_image2;
     private String big_image3;
-    private String skidka;
-    private String new_cena;
+    private int skidka;
+    private int new_cena;
     private String old_cena;
     private String created_at;
     private boolean is_fav = false;
@@ -48,7 +48,7 @@ public class Tovar {
     }
 
     public Tovar(int uniqueId, String id_tovar, String name, String opisanie, String image, String big_image, String big_image2,
-                 String big_image3, String skidka, String new_cena, String old_cena, String created_at, boolean is_fav, String shop_name,
+                 String big_image3, int skidka, int new_cena, String old_cena, String created_at, boolean is_fav, String shop_name,
                  String shop_id, String first_name, long time, String category, String description) {
         this.uniqueId = uniqueId;
         this.id_tovar = id_tovar;
@@ -72,8 +72,8 @@ public class Tovar {
     }
 
     @Ignore
-    public Tovar(String id_tovar, String name, String opisanie, String image, String big_image, String big_image2, String big_image3, String skidka,
-                 String new_cena, String old_cena, String created_at, boolean is_fav, String shop_name, String shop_id, ParseObject shop_object, String first_name, long time, String category, String description) {
+    public Tovar(String id_tovar, String name, String opisanie, String image, String big_image, String big_image2, String big_image3, int skidka,
+                 int new_cena, String old_cena, String created_at, boolean is_fav, String shop_name, String shop_id, ParseObject shop_object, String first_name, long time, String category, String description) {
         this.id_tovar = id_tovar;
         this.name = name;
         this.opisanie = opisanie;
@@ -194,11 +194,11 @@ public class Tovar {
 
 
 
-    public String getNew_cena() {
+    public int getNew_cena() {
         return new_cena;
     }
 
-    public void setNew_cena(String new_cena) {
+    public void setNew_cena(int new_cena) {
         this.new_cena = new_cena;
     }
 
@@ -210,11 +210,11 @@ public class Tovar {
         this.old_cena = old_cena;
     }
 
-    public void setSkidka(String skidka) {
+    public void setSkidka(int skidka) {
         this.skidka = skidka;
     }
 
-    public String getSkidka() {
+    public int getSkidka() {
         return skidka;
     }
 

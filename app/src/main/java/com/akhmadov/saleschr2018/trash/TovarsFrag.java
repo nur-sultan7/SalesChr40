@@ -163,8 +163,8 @@ public class TovarsFrag extends Fragment implements ViewPager.OnPageChangeListen
                 ParseFile imageAsk2 = (ParseFile) tovar_parse.get("tovar_big_image");
                 tovar.setBig_image(imageAsk2.getUrl());
                 tovar.setName(String.valueOf(tovar_parse.get("tovar_name")));
-                tovar.setSkidka(String.valueOf(tovar_parse.get("tovar_skidka")));
-                tovar.setNew_cena(String.valueOf(tovar_parse.get("tovar_new_price")));
+                tovar.setSkidka(tovar_parse.getInt("tovar_skidka"));
+                tovar.setNew_cena(tovar_parse.getInt("tovar_new_price"));
                 tovar.setOld_cena(tovar_parse.getString("tovar_old_price"));
                 tovar.setId_tovar(tovar_parse.getObjectId());
                 tovar.setOpisanie(tovar_parse.getString("tovar_opisanie"));

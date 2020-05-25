@@ -135,8 +135,8 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .resize(devicew, deviceh)
                     .centerCrop()
                     .into(myViewHolder.tovar_image);
-            myViewHolder.old_cena.setText(tovar.getOld_cena());
-            myViewHolder.new_cena.setText(tovar.getNew_cena());
+            myViewHolder.old_cena.setText(String.valueOf(tovar.getOld_cena()));
+            myViewHolder.new_cena.setText(String.valueOf(tovar.getNew_cena()));
             myViewHolder.tovar_category.setText(tovar.getCategory());
             myViewHolder.skidka.setText(tovar.getSkidka() + "%");
             myViewHolder.old_cena.setPaintFlags(myViewHolder.old_cena.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
