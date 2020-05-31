@@ -1,8 +1,10 @@
 package com.akhmadov.saleschr2018.FavouriteCategory;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,11 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,6 +33,7 @@ import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Shop;
 import com.akhmadov.saleschr2018.data.Tovar;
 import com.akhmadov.saleschr2018.libs.DialogFilter;
+import com.akhmadov.saleschr2018.utils.DataUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -207,6 +212,19 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
             public void onClick(int position) {
                 mainModelView.deleteFavouriteTovar(adapter.getItemByPosition(position).getId_tovar());
                 adapter.deleteByPosition(position);
+            }
+        });
+        adapter.setOnItemClickListener(new FavouriteTovarsAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, ImageView imageView, int position, String currentImage) {
+                Intent intent = DataUtil.getIntentTovarCardView(getContext(),1,adapter.getItemByPosition(position), currentImage);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    view.setTransitionName("selected_tovar_image");
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imageView, view.getTransitionName());
+                   startActivity(intent, optionsCompat.toBundle());
+                } else {
+                    startActivity(intent);
+                }
             }
         });
       //  new RemoteDataTask().execute();

@@ -52,7 +52,7 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
     }
     public interface OnItemClickListener
     {
-        void onClick(int position);
+        void onClick(View view,ImageView imageView, int position, String currentImage);
     }
 
     @NonNull
@@ -179,10 +179,11 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
                 public void onClick(View view) {
                     if (onItemClickListener!=null)
                     {
-                        onItemClickListener.onClick(getAdapterPosition());
+                        onItemClickListener.onClick(view, tovar_image,getAdapterPosition(), tovar_image.getDrawable().toString());
                     }
                 }
             });
+
 
 
         }

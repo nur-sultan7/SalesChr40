@@ -175,8 +175,14 @@
 
                 android:text="Decsription"
                 android:textSize="18sp" />
-
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardview_shop_layout"
+    android:layout_width="match_parent"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_height="wrap_content">
             <RelativeLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -188,6 +194,7 @@
                     android:layout_marginLeft="30dp" />
 
                 <TextView
+                    android:id="@+id/cardview_shop_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -201,7 +208,25 @@
                     android:text="Shop Name"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cardview_shop_fallow"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/rouded_blue_background_textview"
+                    android:text="fallow"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp" />
             </RelativeLayout>
+</androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

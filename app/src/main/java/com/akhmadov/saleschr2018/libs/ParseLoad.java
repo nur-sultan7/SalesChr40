@@ -39,6 +39,7 @@ public class ParseLoad {
             tovar.setId_tovar(tovar_parse.getObjectId());
             tovar.setName(tovar_parse.getString("tovar_opisanie"));
             tovar.setShop_id(tovar_parse.getString("shop_id"));
+            tovar.setShop_name(tovar_parse.getString("shop_name"));
             tovar.setShop_object( tovar_parse.getParseObject("shop_object"));
             tovar.setId_tovar(tovar_parse.getObjectId());
             tovars.add(tovar);
