@@ -24,7 +24,7 @@ public interface TovarsDao {
     List<FavouriteTovar> getAllFavourite(String orderBy);*/
 
     @RawQuery
-    List<FavouriteTovar> getAllFavourite2(SupportSQLiteQuery sortQuery);
+    List<FavouriteTovar> getAllFavourite(SupportSQLiteQuery sortQuery);
 
 
 }

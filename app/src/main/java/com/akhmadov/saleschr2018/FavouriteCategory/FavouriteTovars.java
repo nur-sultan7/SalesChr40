@@ -3,7 +3,6 @@ package com.akhmadov.saleschr2018.FavouriteCategory;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -118,9 +117,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
     private void setFavouriteByOrder(String orderBy)
     {
         FavouriteTovars.orderBy =orderBy;
-        tovars.clear();
-        tovars.addAll(mainModelView.getFavouriteTovars(orderBy));
-        adapter.setFavouriteTovarsList(tovars);
+        loadDataByOrderBy(FavouriteTovars.orderBy);
         filter_dialog.dismiss();
     }
 
@@ -176,7 +173,6 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
                 break;
             default:
                 break;
-
         }
         return true;
     }
@@ -227,10 +223,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
                 }
             }
         });
-      //  new RemoteDataTask().execute();
-
         return view;
-
     }
 
     @Override
@@ -240,38 +233,23 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         //swipeRefreshLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setRefreshing(false);
         tovars = new ArrayList<>();
-        tovars.addAll(mainModelView.getFavouriteTovars(orderBy));
-        adapter.setFavouriteTovarsList(tovars);
+        loadDataByOrderBy(orderBy);
     }
 
 
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        new RemoteDataTask().execute();
+        loadDataByOrderBy(orderBy);
+    }
+    private void loadDataByOrderBy(String orderBy)
+    {
+        tovars.clear();
+        tovars.addAll(mainModelView.getFavouriteTovars(orderBy));
+        adapter.setFavouriteTovarsList(tovars);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 
-   public class RemoteDataTask extends AsyncTask<String, Void, List<Tovar>> {
-        @Override
-        protected List<Tovar> doInBackground(String... params) {
-           List<Tovar> results = new ArrayList<>();
-           orderBy=params[0];
-           results.addAll(mainModelView.getFavouriteTovars(orderBy));
-           return results;
-        }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // progressBar.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setRefreshing(false);
-        }
-
-        protected void onPostExecute(List<Tovar> result) {
-
-            adapter.setFavouriteTovarsList(result);
-        }
-
-    }
 }

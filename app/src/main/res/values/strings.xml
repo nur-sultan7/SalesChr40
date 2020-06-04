@@ -29,13 +29,14 @@
     <string name="unfollow">Отписаться</string>
     <string name="show_map">Показать на карте</string>
     <string name="tovar_name">Tovar Name</string>
-    <string name="loading">Загрузка...</string>
+    <string name="loading">Загрузка…</string>
     <string name="wanna_add_shop">Хотите добавить свой магазин ?</string>
     <string name="wanna_add_shop_2">Для добавления магазина или получения консультации обращайтесь:</string>
-    <string name="imam_phone_number">+7 928 940-84-93</string>
+    <string name="imam_phone_number">+7 928 940–84–93</string>
     <string name="sales_manager">сэйлс-манеджер: Имам</string>
     <string name="say_you_from_us">Скажите в магазине, что нашли товар в приложении !</string>
     <string name="developer_name">Разработчик: Ахмадов Н.А.</string>
+    <string name="shop_follow">Подписаться</string>
 
 
 </resources>

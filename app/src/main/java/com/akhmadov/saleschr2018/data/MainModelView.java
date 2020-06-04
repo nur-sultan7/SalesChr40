@@ -55,7 +55,7 @@ public class MainModelView extends AndroidViewModel {
            List<FavouriteTovar> favouriteTovarList=null;
             if (voids[0] !=null) {
                 String query ="SELECT * FROM favourite_tovars ORDER BY " + voids[0];
-                favouriteTovarList = database.tovarsDao().getAllFavourite2(new SimpleSQLiteQuery(query));
+                favouriteTovarList = database.tovarsDao().getAllFavourite(new SimpleSQLiteQuery(query));
             }
             return favouriteTovarList;
         }

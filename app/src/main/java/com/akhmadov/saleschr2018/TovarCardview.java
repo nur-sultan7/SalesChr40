@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class TovarCardview extends AppCompatActivity {
     private ImageView right;
     private FrameLayout frameLayout;
 
+    private ImageView shopImage;
     private CardView shop_layout;
     private TextView shop_name;
 
@@ -126,6 +129,10 @@ public class TovarCardview extends AppCompatActivity {
                 shop_layout.setVisibility(View.VISIBLE);
                 shop_name=findViewById(R.id.cardview_shop_name);
                 shop_name.setText(intent.getStringExtra("shop_name"));
+                shopImage=findViewById(R.id.cardview_shop_img);
+                String shopImg= intent.getStringExtra("shop_image");
+                Picasso.get().load(shopImg)
+                        .into(shopImage);
                 break;
         }
 

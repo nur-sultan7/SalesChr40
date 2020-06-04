@@ -29,18 +29,17 @@ public class Tovar {
     private boolean is_fav = false;
     private String shop_name;
     private String shop_id;
+    private String shop_img;
 
-    public int getUniqueId() {
-        return uniqueId;
-    }
+    @Ignore
+    private ParseObject shop_object;
+    private String first_name;
+    private long time;
+    private String category;
+    private String description;
 
-    public boolean isIs_fav() {
-        return is_fav;
-    }
 
-    public void setIs_fav(boolean is_fav) {
-        this.is_fav = is_fav;
-    }
+
 
 @Ignore
     public Tovar() {
@@ -49,7 +48,7 @@ public class Tovar {
 
     public Tovar(int uniqueId, String id_tovar, String name, String opisanie, String image, String big_image, String big_image2,
                  String big_image3, int skidka, int new_cena, String old_cena, String created_at, boolean is_fav, String shop_name,
-                 String shop_id, String first_name, long time, String category, String description) {
+                 String shop_id, String first_name, long time, String category, String description, String shop_img) {
         this.uniqueId = uniqueId;
         this.id_tovar = id_tovar;
         this.name = name;
@@ -69,11 +68,13 @@ public class Tovar {
         this.time = time;
         this.category = category;
         this.description = description;
+        this.shop_img=shop_img;
+
     }
 
     @Ignore
     public Tovar(String id_tovar, String name, String opisanie, String image, String big_image, String big_image2, String big_image3, int skidka,
-                 int new_cena, String old_cena, String created_at, boolean is_fav, String shop_name, String shop_id, ParseObject shop_object, String first_name, long time, String category, String description) {
+                 int new_cena, String old_cena, String created_at, boolean is_fav, String shop_name, String shop_id, ParseObject shop_object, String first_name, long time, String category, String description, String shop_img) {
         this.id_tovar = id_tovar;
         this.name = name;
         this.opisanie = opisanie;
@@ -93,24 +94,54 @@ public class Tovar {
         this.time = time;
         this.category = category;
         this.description = description;
+        this.shop_img=shop_img;
+
     }
 
-    @Ignore
-    public ParseObject getShop_object() {
-        return shop_object;
+    public int getUniqueId() {
+        return uniqueId;
     }
 
-    @Ignore
-    public void setShop_object(ParseObject shop_object) {
-        this.shop_object = shop_object;
+
+    public String getId_tovar() {
+        return id_tovar;
     }
 
-    @Ignore
-    private ParseObject shop_object;
-    private String first_name;
-    private long time;
-    private String category;
-    private String description;
+    public void setId_tovar(String id_tovar) {
+        this.id_tovar = id_tovar;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOpisanie() {
+        return opisanie;
+    }
+
+    public void setOpisanie(String opisanie) {
+        this.opisanie = opisanie;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getBig_image() {
+        return big_image;
+    }
+
+    public void setBig_image(String big_image) {
+        this.big_image = big_image;
+    }
 
     public String getBig_image2() {
         return big_image2;
@@ -128,71 +159,13 @@ public class Tovar {
         this.big_image3 = big_image3;
     }
 
-    public String getDescription() {
-        return description;
+    public int getSkidka() {
+        return skidka;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSkidka(int skidka) {
+        this.skidka = skidka;
     }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public void setShop_id(String shop_id) {
-        this.shop_id = shop_id;
-    }
-
-    public String getShop_id() {
-        return shop_id;
-    }
-
-    public String getId_tovar() {
-        return id_tovar;
-    }
-
-    public void setId_tovar(String id_tovar) {
-        this.id_tovar = id_tovar;
-    }
-
-    public void setShop_name(String shop_name) {
-        this.shop_name = shop_name;
-    }
-
-    public String getShop_name() {
-        return shop_name;
-    }
-
-
 
     public int getNew_cena() {
         return new_cena;
@@ -210,44 +183,83 @@ public class Tovar {
         this.old_cena = old_cena;
     }
 
-    public void setSkidka(int skidka) {
-        this.skidka = skidka;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public int getSkidka() {
-        return skidka;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-
-    public String getImage() {
-        return image;
+    public boolean isIs_fav() {
+        return is_fav;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setIs_fav(boolean is_fav) {
+        this.is_fav = is_fav;
     }
 
-    public String getOpisanie() {
-        return opisanie;
+    public String getShop_name() {
+        return shop_name;
     }
 
-    public void setOpisanie(String opisanie) {
-        this.opisanie = opisanie;
+    public void setShop_name(String shop_name) {
+        this.shop_name = shop_name;
     }
 
-    public String getName() {
-        return name;
+    public String getShop_id() {
+        return shop_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setShop_id(String shop_id) {
+        this.shop_id = shop_id;
     }
 
-    public String getBig_image() {
-        return big_image;
+    public String getShop_img() {
+        return shop_img;
     }
 
-    public void setBig_image(String big_image) {
-        this.big_image = big_image;
+    public void setShop_img(String shop_img) {
+        this.shop_img = shop_img;
+    }
+
+    public ParseObject getShop_object() {
+        return shop_object;
+    }
+
+    public void setShop_object(ParseObject shop_object) {
+        this.shop_object = shop_object;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
