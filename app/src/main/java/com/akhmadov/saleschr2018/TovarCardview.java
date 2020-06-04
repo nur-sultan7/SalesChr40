@@ -35,6 +35,7 @@ public class TovarCardview extends AppCompatActivity {
     private ImageView shopImage;
     private CardView shop_layout;
     private TextView shop_name;
+    private TextView shopFollow;
 
     private int fromCategory;
 
@@ -53,8 +54,8 @@ public class TovarCardview extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        TextView name = findViewById(R.id.cardview_tovar_name);
-        TextView category = findViewById(R.id.cardview_tovar_category);
+        TextView name = findViewById(R.id.cardView_tovar_name);
+        TextView category = findViewById(R.id.cardView_tovar_category);
         TextView old_cena = findViewById(R.id.tovar_cardview_old_price);
         TextView new_cena = findViewById(R.id.tovar_cardview_new_price);
         TextView skidka = findViewById(R.id.tovar_cardview_skidka);
@@ -127,12 +128,21 @@ public class TovarCardview extends AppCompatActivity {
                 break;
             case 1:
                 shop_layout.setVisibility(View.VISIBLE);
-                shop_name=findViewById(R.id.cardview_shop_name);
+                shop_name=findViewById(R.id.cardView_shop_name);
                 shop_name.setText(intent.getStringExtra("shop_name"));
-                shopImage=findViewById(R.id.cardview_shop_img);
+                shopImage=findViewById(R.id.cardView_shop_img);
                 String shopImg= intent.getStringExtra("shop_image");
                 Picasso.get().load(shopImg)
                         .into(shopImage);
+                shopFollow=findViewById(R.id.cardView_shop_follow);
+                shopFollow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+
                 break;
         }
 
@@ -167,6 +177,7 @@ public class TovarCardview extends AppCompatActivity {
             right.setVisibility(View.VISIBLE);
 
     }
+
 
 
 }

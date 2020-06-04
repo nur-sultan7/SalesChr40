@@ -65,43 +65,47 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
 
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/cardview_shop_img"
+                        android:id="@+id/cardView_shop_img"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/cardview_shop_name"
+                        android:id="@+id/cardView_shop_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_toEndOf="@+id/cardview_shop_img"
-                        android:layout_toRightOf="@+id/cardview_shop_img"
+                        android:layout_toEndOf="@+id/cardView_shop_img"
+                        android:layout_toRightOf="@+id/cardView_shop_img"
                         android:maxLines="3"
-                        android:paddingStart="30dp"
-                        android:paddingLeft="30dp"
-                        android:paddingEnd="30dp"
-                        android:paddingRight="30dp"
+                        android:paddingStart="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingRight="10dp"
                         android:text="Shop Name"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/cardview_shop_fallow"
-                        app:layout_constraintStart_toEndOf="@+id/cardview_shop_img"
+                        app:layout_constraintEnd_toStartOf="@+id/cardView_shop_follow"
+                        app:layout_constraintStart_toEndOf="@+id/cardView_shop_img"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/cardview_shop_fallow"
+                        android:id="@+id/cardView_shop_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -122,7 +126,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <TextView
-                android:id="@+id/cardview_tovar_name"
+                android:id="@+id/cardView_tovar_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -136,7 +140,7 @@
                 android:transitionName="selected_tovar_name" />
 
             <TextView
-                android:id="@+id/cardview_tovar_category"
+                android:id="@+id/cardView_tovar_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
