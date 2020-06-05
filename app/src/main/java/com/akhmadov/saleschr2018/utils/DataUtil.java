@@ -29,6 +29,7 @@ public class DataUtil {
         intent.putExtra("image1", tovar.getBig_image());
         intent.putExtra("image2", tovar.getBig_image2());
         intent.putExtra("image3", tovar.getBig_image3());
+        intent.putExtra("shop_id",tovar.getShop_id());
         intent.putExtra("shop_name",tovar.getShop_name());
         intent.putExtra("shop_image",tovar.getShop_img());
         return intent;

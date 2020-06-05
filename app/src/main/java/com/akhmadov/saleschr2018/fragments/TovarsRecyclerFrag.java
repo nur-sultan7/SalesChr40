@@ -39,6 +39,7 @@ import com.akhmadov.saleschr2018.libs.DialogFilter;
 import com.akhmadov.saleschr2018.libs.ILoadMore;
 import com.akhmadov.saleschr2018.libs.ParseLoad;
 import com.akhmadov.saleschr2018.libs.ParseQueryTovars;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -54,6 +55,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
     CategoryTovarsAdapter adapter;
     private SearchView searchView;
     private ParseQueryTovars tovars_query;
+    private ParseQuery shop_query;
     private static List<ParseObject> ob;
     private List<Tovar> tovars;
     private ProgressBar progressBar;
@@ -86,11 +88,36 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         String strtext = getArguments().getString("shop");
         shop_id = getArguments().getString("shop_id");
         shop_name = getArguments().getString("shop");
-        shop_location = getArguments().getString("shop_location");
         shop_img = getArguments().getString("shop_img");
-        shop_description = getArguments().getString("shop_description");
-        shop_tel = getArguments().getString("shop_tel");
-        shop_inst = getArguments().getString("shop_inst");
+
+        if (getArguments().getInt("isFromFavourite",0)==1)
+        {
+            shop_query = new ParseQuery(
+                    "Shops");
+            shop_query.whereEqualTo("objectId",shop_id);
+            shop_query.getFirstInBackground(new GetCallback() {
+                @Override
+                public void done(ParseObject object, ParseException e) {
+                    shop_location=object.getString("shop_location");
+                    shop_description=object.getString("shop_description");
+                    shop_tel=object.getString("shop_tel");
+                    shop_inst=object.getString("shop_inst");
+                }
+                @Override
+                public void done(Object o, Throwable throwable) {
+                }
+            });
+        }
+        else
+        {
+            shop_location = getArguments().getString("shop_location");
+            shop_description = getArguments().getString("shop_description");
+            shop_tel = getArguments().getString("shop_tel");
+            shop_inst = getArguments().getString("shop_inst");
+        }
+
+
+
         toolbar.setTitle(strtext);
         swipeRefreshLayout = view.findViewById(R.id.shops_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -215,18 +242,15 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.action_info:
                 showPopup();
                 break;
             case R.id.action_filter:
                 filter_dialog.showDialogFilter();
                 filter_dialog.checkChoice(orderBy);
-
                 break;
             default:
                 break;
-
         }
         return true;
     }
@@ -294,15 +318,12 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                     default:
                         return false;
                 }
-
             }
 
             @Override
             public void onMenuModeChange(MenuBuilder menu) {
             }
         });
-
-
         // Display the menu
         optionsMenu.show();
     }
@@ -326,7 +347,6 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
     }
 
     public class RemoteDataTask extends AsyncTask<Integer, Void, Void> {
-
         @Override
         protected Void doInBackground(Integer... params) {
 
@@ -361,9 +381,6 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                 }
             }
             tovars = ParseLoad.RetrievingTovars(ob);
-
-
-
             return null;
         }
 

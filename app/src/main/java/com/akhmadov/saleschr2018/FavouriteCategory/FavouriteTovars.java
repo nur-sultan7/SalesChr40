@@ -1,6 +1,7 @@
 package com.akhmadov.saleschr2018.FavouriteCategory;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -61,7 +62,15 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
 
     private static String orderBy;
     private static int checkChoice;
+    private static Context favContext;
 
+    public static Context getFavContext() {
+        return favContext;
+    }
+
+    public static void setFavContext(Context favContext) {
+        FavouriteTovars.favContext = favContext;
+    }
 
     public static FavouriteTovars newInstance(String param1, String param2) {
         FavouriteTovars fragment = new FavouriteTovars();
@@ -223,6 +232,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
                 }
             }
         });
+        setFavContext(getContext());
         return view;
     }
 

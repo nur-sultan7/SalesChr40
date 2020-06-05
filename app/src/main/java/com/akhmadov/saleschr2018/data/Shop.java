@@ -1,5 +1,7 @@
 package com.akhmadov.saleschr2018.data;
 
+import androidx.room.Ignore;
+
 /**
  * Created by Akhmadov on 02.10.2017.
  */
@@ -14,6 +16,17 @@ public class Shop {
     private String description;
     private String inst;
     private boolean position_about=false;
+
+    public Shop(String name, String location, String image, String shop_id, String big_image, String tel, String description, String inst) {
+        this.name = name;
+        this.location = location;
+        this.image = image;
+        this.shop_id = shop_id;
+        this.big_image = big_image;
+        this.tel = tel;
+        this.description = description;
+        this.inst = inst;
+    }
 
     public boolean isPosition_about() {
         return position_about;
@@ -62,10 +75,10 @@ public class Shop {
     public String getShop_id() {
         return shop_id;
     }
-
+@Ignore
     public Shop() {
     }
-
+@Ignore
     public Shop(String shop_id, String name, String location, String image ) {
         this.name = name;
         this.location = location;

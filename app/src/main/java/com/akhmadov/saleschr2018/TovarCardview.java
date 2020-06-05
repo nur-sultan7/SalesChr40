@@ -15,8 +15,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.akhmadov.saleschr2018.FavouriteCategory.FavouriteTovars;
+import com.akhmadov.saleschr2018.fragments.TovarsRecyclerFrag;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,6 +41,9 @@ public class TovarCardview extends AppCompatActivity {
     private TextView shopFollow;
 
     private int fromCategory;
+    private String shop_id;
+    private String txt_shop_name;
+    private String txtShopImg;
 
 
 
@@ -48,7 +54,6 @@ public class TovarCardview extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(R.transition.tovar_image_transition));
         }
-
         setContentView(R.layout.activity_tovar_cardview);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
@@ -78,7 +83,6 @@ public class TovarCardview extends AppCompatActivity {
                 viewPager.arrowScroll(View.FOCUS_RIGHT);
             }
         });
-
 
         Intent intent = getIntent();
         fromCategory=intent.getIntExtra("from_category",0);
@@ -124,25 +128,40 @@ public class TovarCardview extends AppCompatActivity {
         switch (fromCategory)
         {
             case 0:
-                shop_layout.setVisibility(View.INVISIBLE);
+                shop_layout.setVisibility(View.GONE);
                 break;
             case 1:
                 shop_layout.setVisibility(View.VISIBLE);
                 shop_name=findViewById(R.id.cardView_shop_name);
-                shop_name.setText(intent.getStringExtra("shop_name"));
+                txt_shop_name=intent.getStringExtra("shop_name");
+                shop_name.setText(txt_shop_name);
                 shopImage=findViewById(R.id.cardView_shop_img);
-                String shopImg= intent.getStringExtra("shop_image");
+                txtShopImg=intent.getStringExtra("shop_image");
+                String shopImg= txtShopImg;
                 Picasso.get().load(shopImg)
                         .into(shopImage);
                 shopFollow=findViewById(R.id.cardView_shop_follow);
+                shop_id=intent.getStringExtra("shop_id");
                 shopFollow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                     }
                 });
-
-
+                shop_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                        AppCompatActivity activity = (AppCompatActivity) FavouriteTovars.getFavContext();
+                        Fragment tovarsFrag = new TovarsRecyclerFrag();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("shop", txt_shop_name);
+                        bundle.putString("shop_id", shop_id);
+                        bundle.putString("shop_img",txtShopImg);
+                        tovarsFrag.setArguments(bundle);
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, tovarsFrag).addToBackStack(null).commitAllowingStateLoss();;
+                    }
+                });
                 break;
         }
 

@@ -52,10 +52,6 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
                        List<Shop> Shopslist) {
         this.context = context;
         this.Shopslist = Shopslist;
-
-
-
-
     }
 
     @Override
