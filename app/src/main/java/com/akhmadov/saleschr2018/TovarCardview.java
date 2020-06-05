@@ -159,7 +159,7 @@ public class TovarCardview extends AppCompatActivity {
                         bundle.putString("shop_id", shop_id);
                         bundle.putString("shop_img",txtShopImg);
                         tovarsFrag.setArguments(bundle);
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, tovarsFrag).addToBackStack(null).commitAllowingStateLoss();;
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, tovarsFrag).addToBackStack(null).commitAllowingStateLoss();
                     }
                 });
                 break;
