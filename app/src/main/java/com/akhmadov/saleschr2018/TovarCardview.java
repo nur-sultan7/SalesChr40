@@ -37,12 +37,10 @@ public class TovarCardview extends AppCompatActivity {
     private ImageView left;
     private ImageView right;
     private FrameLayout frameLayout;
-
     private ImageView shopImage;
     private CardView shop_layout;
     private TextView shop_name;
     private TextView shopFollow;
-
     private int fromCategory;
     private String shop_id;
     private String txt_shop_name;
@@ -143,14 +141,13 @@ public class TovarCardview extends AppCompatActivity {
                 shop_name.setText(txt_shop_name);
                 shopImage=findViewById(R.id.cardView_shop_img);
                 txt_shopImg =intent.getStringExtra("shop_image");
-
                 Picasso.get().load(txt_shopImg)
                         .into(shopImage);
                 shopFollow=findViewById(R.id.cardView_shop_follow);
                 shop_id=intent.getStringExtra("shop_id");
                 final FollowingShop followingShop = modelView.getFollowingShopById(shop_id);
                 isFollowingShop= followingShop != null;
-
+                checkIsFollowingShop(isFollowingShop);
                 shopFollow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -217,10 +214,15 @@ public class TovarCardview extends AppCompatActivity {
     }
     public void checkIsFollowingShop(boolean isFollowingShop)
     {
-        if (isFollowingShop)
-        shopFollow.setText("Отписаться");
-                else
-        shopFollow.setText("Подписаться");
+        if (isFollowingShop) {
+            shopFollow.setText("Отписаться");
+            shopFollow.setBackground(getResources().getDrawable(R.drawable.rouded_red_background_textview));
+
+        }
+        else {
+            shopFollow.setText("Подписаться");
+            shopFollow.setBackground(getResources().getDrawable(R.drawable.rouded_blue_background_textview));
+        }
     }
 
 

@@ -29,13 +29,14 @@ public interface TovarsDao {
     //Following Shops
     @Insert
     void insertFollowingShop(FollowingShop shop);
+
     @Query("Select * from following_shops")
     List<FollowingShop> getAllFollowingShops();
     @Query("select unique_id from following_shops")
     List<Integer> getAllFollowingShopsIds();
     @Query("Delete from following_shops where shop_id like :id")
     void deleteFollowingShop(String id);
-    @Query("select * from following_shops where shop_id like :id")
+    @Query("Select * from following_shops where shop_id like :id")
     FollowingShop getFollowingShopID(String id);
 
 

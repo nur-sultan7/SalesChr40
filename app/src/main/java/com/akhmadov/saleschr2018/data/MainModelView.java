@@ -105,7 +105,7 @@ public class MainModelView extends AndroidViewModel {
         @Override
         protected Void doInBackground(FollowingShop... shops) {
             if (shops[0]!=null)
-                database.tovarsDao().insertFollowingShop(shops[0]);
+             database.tovarsDao().insertFollowingShop(shops[0]);
             return null;
         }
     }

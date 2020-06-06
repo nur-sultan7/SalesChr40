@@ -28,7 +28,7 @@ public class Shop {
         this.inst = inst;
     }
     @Ignore
-    public Shop(String name, String image, String shop_id) {
+    public Shop(String shop_id, String name, String image) {
         this.name = name;
         this.image = image;
         this.shop_id = shop_id;
