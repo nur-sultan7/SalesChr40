@@ -27,6 +27,12 @@ public class Shop {
         this.description = description;
         this.inst = inst;
     }
+    @Ignore
+    public Shop(String name, String image, String shop_id) {
+        this.name = name;
+        this.image = image;
+        this.shop_id = shop_id;
+    }
 
     public boolean isPosition_about() {
         return position_about;
@@ -86,6 +92,7 @@ public class Shop {
         this.shop_id = shop_id;
         this.image = image;
     }
+
 
 
     public String getImage() {

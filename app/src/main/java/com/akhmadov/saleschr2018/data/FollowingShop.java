@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "following_shops")
 public class FollowingShop extends Shop {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int unique_id;
     public FollowingShop(int unique_id,String name, String location, String image, String shop_id, String big_image, String tel, String description, String inst) {
         super(name, location, image, shop_id, big_image, tel, description, inst);
@@ -18,8 +18,8 @@ public class FollowingShop extends Shop {
     }
 
     @Ignore
-    public FollowingShop(Shop shop)
+    public FollowingShop(String id, String name , String image )
     {
-        super(shop.getName(),shop.getLocation(),shop.getImage(),shop.getShop_id(),shop.getBig_image(),shop.getTel(),shop.getDescription(),shop.getInst());
+        super(id,name,image);
     }
 }

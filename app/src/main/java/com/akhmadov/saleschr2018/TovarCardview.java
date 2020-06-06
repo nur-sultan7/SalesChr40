@@ -16,9 +16,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.akhmadov.saleschr2018.FavouriteCategory.FavouriteTovars;
+import com.akhmadov.saleschr2018.data.FollowingShop;
+import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.fragments.TovarsRecyclerFrag;
 import com.squareup.picasso.Picasso;
 
@@ -43,7 +46,9 @@ public class TovarCardview extends AppCompatActivity {
     private int fromCategory;
     private String shop_id;
     private String txt_shop_name;
-    private String txtShopImg;
+    private String txt_shopImg;
+    private MainModelView modelView;
+    private static boolean isFollowingShop;
 
 
 
@@ -59,6 +64,7 @@ public class TovarCardview extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+        modelView= ViewModelProviders.of(this).get(MainModelView.class);
         TextView name = findViewById(R.id.cardView_tovar_name);
         TextView category = findViewById(R.id.cardView_tovar_category);
         TextView old_cena = findViewById(R.id.tovar_cardview_old_price);
@@ -136,16 +142,29 @@ public class TovarCardview extends AppCompatActivity {
                 txt_shop_name=intent.getStringExtra("shop_name");
                 shop_name.setText(txt_shop_name);
                 shopImage=findViewById(R.id.cardView_shop_img);
-                txtShopImg=intent.getStringExtra("shop_image");
-                String shopImg= txtShopImg;
-                Picasso.get().load(shopImg)
+                txt_shopImg =intent.getStringExtra("shop_image");
+
+                Picasso.get().load(txt_shopImg)
                         .into(shopImage);
                 shopFollow=findViewById(R.id.cardView_shop_follow);
                 shop_id=intent.getStringExtra("shop_id");
+                final FollowingShop followingShop = modelView.getFollowingShopById(shop_id);
+                isFollowingShop= followingShop != null;
+
                 shopFollow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (isFollowingShop)
+                        {
+                            isFollowingShop=false;
+                            modelView.deleteFollowingShop(shop_id);
+                        }
+                        else
+                        {
+                            isFollowingShop=true;
+                            modelView.insertFollowingShop(new FollowingShop(shop_id,txt_shop_name,txt_shopImg));
+                        }
+                        checkIsFollowingShop(isFollowingShop);
                     }
                 });
                 shop_layout.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +176,7 @@ public class TovarCardview extends AppCompatActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("shop", txt_shop_name);
                         bundle.putString("shop_id", shop_id);
-                        bundle.putString("shop_img",txtShopImg);
+                        bundle.putString("shop_img", txt_shopImg);
                         tovarsFrag.setArguments(bundle);
                         activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, tovarsFrag).addToBackStack(null).commitAllowingStateLoss();
                     }
@@ -195,6 +214,13 @@ public class TovarCardview extends AppCompatActivity {
         else
             right.setVisibility(View.VISIBLE);
 
+    }
+    public void checkIsFollowingShop(boolean isFollowingShop)
+    {
+        if (isFollowingShop)
+        shopFollow.setText("Отписаться");
+                else
+        shopFollow.setText("Подписаться");
     }
 
 
