@@ -100,12 +100,12 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/cardView_shop_follow"
+                        app:layout_constraintEnd_toStartOf="@+id/shop_follow"
                         app:layout_constraintStart_toEndOf="@+id/cardView_shop_img"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/cardView_shop_follow"
+                        android:id="@+id/shop_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

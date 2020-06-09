@@ -37,6 +37,9 @@
     <string name="say_you_from_us">Скажите в магазине, что нашли товар в приложении !</string>
     <string name="developer_name">Разработчик: Ахмадов Н.А.</string>
     <string name="shop_follow">Подписаться</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="title_about_shop">О магазине</string>
+    <string name="title_description_not_exist">Описание отсутствует</string>
 
 
 </resources>

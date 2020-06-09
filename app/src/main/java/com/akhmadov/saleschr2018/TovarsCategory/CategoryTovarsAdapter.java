@@ -50,6 +50,12 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private MainModelView mainModelView;
 
+    public void setFromCategory(int fromCategory) {
+        this.fromCategory = fromCategory;
+    }
+
+    private int fromCategory;
+
 
     public void setOnLikeClickListener(OnLikeClickListener onLikeClickListener) {
         this.onLikeClickListener = onLikeClickListener;
@@ -157,7 +163,7 @@ public class CategoryTovarsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent =  DataUtil.getIntentTovarCardView(mContext,0,tovar,myViewHolder.tovar_image.getDrawable().toString());
+                    Intent intent =  DataUtil.getIntentTovarCardView(mContext,fromCategory,tovar,myViewHolder.tovar_image.getDrawable().toString());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         view.setTransitionName("selected_tovar_image");
                         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext, myViewHolder.tovar_image, view.getTransitionName());

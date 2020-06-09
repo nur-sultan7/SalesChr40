@@ -143,7 +143,7 @@ public class TovarCardview extends AppCompatActivity {
                 txt_shopImg =intent.getStringExtra("shop_image");
                 Picasso.get().load(txt_shopImg)
                         .into(shopImage);
-                shopFollow=findViewById(R.id.cardView_shop_follow);
+                shopFollow=findViewById(R.id.shop_follow);
                 shop_id=intent.getStringExtra("shop_id");
                 final FollowingShop followingShop = modelView.getFollowingShopById(shop_id);
                 isFollowingShop= followingShop != null;

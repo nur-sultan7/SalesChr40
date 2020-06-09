@@ -187,6 +187,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity() , 2));
         //listView.addItemDecoration( new LayoutMarginDecoration( 2, 10 ) );
         adapter = new CategoryTovarsAdapter(mainModelView,recyclerView,this.getContext());
+        adapter.setFromCategory(1);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemViewCacheSize(12);
         adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {

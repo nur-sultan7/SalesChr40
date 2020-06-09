@@ -1,8 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 <androidx.cardview.widget.CardView
     android:id="@+id/sales_shop_cardview_id"
     android:clickable="true"
@@ -10,7 +11,6 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="15sp"
     cardview:cardCornerRadius="8sp"
     >
@@ -35,43 +35,79 @@
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="3dp"
             android:background="#edecec" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:minHeight="50dp">
 
-        <TextView
-            android:id="@+id/shop_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingStart="10sp"
-            android:paddingLeft="10sp"
-            android:paddingBottom="5sp"
-            android:text="Shop Name"
-            android:textStyle="bold"
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/shop_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="5sp"
+        android:text="@string/shop_name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        cardview:layout_constraintBottom_toBottomOf="parent"
+        cardview:layout_constraintEnd_toStartOf="@+id/shop_follow"
+        cardview:layout_constraintHorizontal_bias="0.0"
+        cardview:layout_constraintStart_toStartOf="parent"
+        cardview:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shop_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@drawable/rouded_blue_background_textview"
+
+        android:paddingLeft="12dp"
+        android:paddingTop="5dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="5dp"
+        android:text="@string/shop_follow"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        cardview:layout_constraintBottom_toBottomOf="parent"
+        cardview:layout_constraintEnd_toEndOf="parent"
+        cardview:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:layout_height="1dp"
+            android:layout_height="3dp"
             android:background="#edecec"
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:minHeight="40sp"
+            android:minHeight="50dp"
             android:id="@+id/shop_location"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:layout_marginStart="10sp"
             android:orientation="horizontal"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
             >
+
             <ImageView
                 android:id="@+id/shop_location_gmap"
                 android:layout_width="25sp"
                 android:layout_height="25sp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/gmap" />
+
             <TextView
                 android:id="@+id/shop_location_name"
                 android:layout_width="match_parent"
@@ -88,31 +124,29 @@
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="1sp"
+            android:layout_height="3dp"
             android:background="#edecec" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5sp"
-            android:paddingStart="10sp"
-            android:paddingLeft="10sp"
-            android:paddingEnd="10sp"
-            android:paddingRight="10sp"
-            android:text="О магазине"
+            android:layout_marginTop="5dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:text="@string/title_about_shop"
             android:textSize="18sp"
             android:textStyle="bold" />
         <TextView
             android:id="@+id/shop_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="10sp"
-            android:paddingLeft="10sp"
-            android:paddingEnd="10sp"
-            android:paddingBottom="10sp"
-            android:paddingRight="10sp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:paddingBottom="10dp"
             android:gravity="fill_horizontal"
-            android:text="Описание отсутствует"
-            android:textSize="16sp" />
+            android:text="@string/title_description_not_exist"
+            android:textSize="16sp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

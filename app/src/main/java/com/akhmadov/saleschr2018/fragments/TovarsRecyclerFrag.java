@@ -33,6 +33,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.ShopAbout;
 import com.akhmadov.saleschr2018.TovarsCategory.CategoryTovarsAdapter;
+import com.akhmadov.saleschr2018.data.FavouriteTovar;
+import com.akhmadov.saleschr2018.data.FollowingShop;
 import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Tovar;
 import com.akhmadov.saleschr2018.libs.DialogFilter;
@@ -131,6 +133,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         recyclerView = view.findViewById(R.id.tovars_recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         adapter = new CategoryTovarsAdapter(mainModelView,recyclerView, getActivity());
+        adapter.setFromCategory(0);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemViewCacheSize(12);
         adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {
@@ -155,7 +158,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
     @Override
     public void onStart() {
         super.onStart();
-
+        isfollowing =mainModelView.getFollowingShopById(shop_id) != null;
     }
 
     @Override
@@ -192,6 +195,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
             }
         });
         mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
+
       ;
     }
 
@@ -294,6 +298,8 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                         return true;
                     case R.id.popup_menu_follow:
                         isfollowing = true;
+                        FollowingShop followingShop = new FollowingShop(shop_id,shop_name,shop_img);
+                        mainModelView.insertFollowingShop(followingShop);
                         toast = Toast.makeText(getContext(), "Вы подписались на обновления \n магазина: \"" + shop_name + "\"", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         v = toast.getView().findViewById(android.R.id.message);
@@ -303,6 +309,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                         return true;
                     case R.id.popup_menu_unfollow:
                         isfollowing = false;
+                        mainModelView.deleteFollowingShop(shop_id);
                         toast = Toast.makeText(getContext(), "Вы отписались от обновлений \n магазина: \"" + shop_name + "\"", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         v = toast.getView().findViewById(android.R.id.message);
