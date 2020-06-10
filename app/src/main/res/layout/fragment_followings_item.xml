@@ -24,6 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="190dp"
             android:adjustViewBounds="true"
+
             android:contentDescription="@string/following_tovar_image_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -153,8 +154,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:shadowColor="@color/white"
-                android:shadowDx="1"
-                android:shadowDy="1"
+                android:shadowDy="2"
+                android:shadowDx="2"
                 android:shadowRadius="2"
                 android:layout_marginStart="20dp"
 

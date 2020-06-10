@@ -17,6 +17,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.MainModelView;
+import com.akhmadov.saleschr2018.data.Tovar;
+import com.akhmadov.saleschr2018.libs.ParseLoad;
+import com.akhmadov.saleschr2018.libs.ParseQueryTovars;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,8 @@ import java.util.List;
 public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private MainModelView mainModelView;
     private ArrayList<String> idsOfShops;
+    private static List<Tovar> tovarList;
+    private static List<ParseObject> parseObjects;
 
     public static FragmentFollowings newInstance ()
     {
@@ -42,8 +49,6 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
         idsOfShops=new ArrayList<>();
         idsOfShops.addAll(mainModelView.getAllFollowingShopsIds());
-
-
 
     }
 
@@ -80,21 +85,31 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     public void onRefresh() {
 
     }
-    private static  class  LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>,Void, Void>
+    private static  class  LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>,Void, List<Tovar>>
     {
-
+        @SafeVarargs
         @Override
-        protected Void doInBackground(ArrayList<String>... lists) {
+        protected final List<Tovar> doInBackground(ArrayList<String>... lists) {
             if (lists[0]!=null && lists[0].size()>0)
             {
-
+                ParseQueryTovars queryTovars = new ParseQueryTovars("Tovars");
+                queryTovars.whereContainedIn("shop_id",lists[0]);
+                queryTovars.orderByDescending("_created_at");
+                queryTovars.setLimit(20);
+                try {
+                     parseObjects= queryTovars.find();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                tovarList= ParseLoad.RetrievingTovars(parseObjects);
             }
-            return null;
+            return tovarList;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(List<Tovar> tovars) {
+            super.onPostExecute(tovars);
+
         }
     }
 }
