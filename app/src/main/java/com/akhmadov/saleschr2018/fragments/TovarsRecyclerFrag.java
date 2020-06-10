@@ -312,8 +312,8 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
                         mainModelView.deleteFollowingShop(shop_id);
                         toast = Toast.makeText(getContext(), "Вы отписались от обновлений \n магазина: \"" + shop_name + "\"", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
-                        v = toast.getView().findViewById(android.R.id.message);
-                        if (v != null) v.setGravity(Gravity.CENTER);
+                       /* v = toast.getView().findViewById(android.R.id.message);
+                        if (v != null) v.setGravity(Gravity.CENTER);*/
                         toast.show();
 
                         return true;

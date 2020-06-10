@@ -40,6 +40,11 @@
     <string name="shop_name">Shop Name</string>
     <string name="title_about_shop">О магазине</string>
     <string name="title_description_not_exist">Описание отсутствует</string>
+    <string name="nav_title_followings">Подписки</string>
+    <string name="following_tovar_image_description">товар из подписки</string>
+    <string name="title_tovar_new_price">8000</string>
+    <string name="title_tovar_old_price">12000</string>
+    <string name="title_tovar_category">Category</string>
 
 
 </resources>

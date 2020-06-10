@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/cardView_shop_img"
+                        android:id="@+id/following_shop_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="22dp"
@@ -83,7 +83,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/cardView_shop_name"
+                        android:id="@+id/following_shop_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="white_transparent">#97FFFFFF</color>
     <color name="icons_color">#999999</color>
     <color name="primary">#E43F3F</color>
     <color name="primary_dark">#E12929</color>

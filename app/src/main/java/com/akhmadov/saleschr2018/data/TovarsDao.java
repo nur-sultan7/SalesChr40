@@ -32,8 +32,8 @@ public interface TovarsDao {
 
     @Query("Select * from following_shops")
     List<FollowingShop> getAllFollowingShops();
-    @Query("select unique_id from following_shops")
-    List<Integer> getAllFollowingShopsIds();
+    @Query("select shop_id from following_shops")
+    List<String> getAllFollowingShopsIds();
     @Query("Delete from following_shops where shop_id like :id")
     void deleteFollowingShop(String id);
     @Query("Select * from following_shops where shop_id like :id")

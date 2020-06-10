@@ -38,7 +38,7 @@ public class MainModelView extends AndroidViewModel {
         return null;
 
     }
-    public List<Integer> getAllFollowingShopsIds()
+    public List<String> getAllFollowingShopsIds()
     {
         try {
             return new GetAllFollowingShopsIds().execute().get();
@@ -71,11 +71,11 @@ public class MainModelView extends AndroidViewModel {
             return followingShop;
         }
     }
-    private static class GetAllFollowingShopsIds extends AsyncTask<Void,Void,List<Integer>>
+    private static class GetAllFollowingShopsIds extends AsyncTask<Void,Void,List<String>>
     {
 
         @Override
-        protected List<Integer> doInBackground(Void... voids) {
+        protected List<String> doInBackground(Void... voids) {
             return database.tovarsDao().getAllFollowingShopsIds();
         }
     }
