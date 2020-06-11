@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.akhmadov.saleschr2018.FollowingsCategory.FragmentFollowings;
 import com.akhmadov.saleschr2018.TovarsCategory.TavarsCategories;
 import com.akhmadov.saleschr2018.FavouriteCategory.FavouriteTovars;
 import com.akhmadov.saleschr2018.fragments.Information;
@@ -21,6 +22,7 @@ import com.parse.ParseInstallation;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
    // SalesMianFrag sales_main;
+    FragmentFollowings fragmentFollowings;
     ShopsCategoriesFragment shopsCategoriesFragment;
     TavarsCategories tovarsFrag;
     FavouriteTovars favFrag;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        fragmentFollowings=FragmentFollowings.newInstance();
         shopsCategoriesFragment = new ShopsCategoriesFragment();
        // sales_main = new SalesMianFrag();
         tovarsFrag = new TavarsCategories();
@@ -104,24 +107,31 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        if (id == R.id.nav_shops) {
-            fragmentTransaction.replace(R.id.container,shopsCategoriesFragment);
-            toolbar.setTitle("Магазины");
+        switch (id)
+        {
+            case R.id.nav_followings:
+                fragmentTransaction.replace(R.id.container,fragmentFollowings);
+                toolbar.setTitle("Подписки");
+            case R.id.nav_shops:
+                fragmentTransaction.replace(R.id.container,shopsCategoriesFragment);
+                toolbar.setTitle("Магазины");
+                break;
+            case R.id.nav_slideshow:
+                fragmentTransaction.replace(R.id.container,tovarsFrag);
+                toolbar.setTitle("Товары");
+                break;
+            case R.id.nav_manage:
+                fragmentTransaction.replace(R.id.container,favFrag);
+                toolbar.setTitle("Избранные товары");
+                break;
+            case R.id.nav_share:
+                fragmentTransaction.replace(R.id.container,information);
+                toolbar.setTitle("Информация");
+                break;
 
-        } else if (id == R.id.nav_slideshow) {
-            fragmentTransaction.replace(R.id.container,tovarsFrag);
-            toolbar.setTitle("Товары");
-
-        } else if (id == R.id.nav_manage) {
-            fragmentTransaction.replace(R.id.container,favFrag);
-            toolbar.setTitle("Избранные товары");
-        } else if (id == R.id.nav_share) {
-            fragmentTransaction.replace(R.id.container,information);
-            toolbar.setTitle("Информация");
         }
         fragmentTransaction.commit();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

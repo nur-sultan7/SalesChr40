@@ -13,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.akhmadov.saleschr2018.FollowingsCategory.adapters.FragmentFollowingAdapter;
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Tovar;
@@ -31,7 +34,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     private ArrayList<String> idsOfShops;
     private static List<Tovar> tovarList;
     private static List<ParseObject> parseObjects;
-
+    private static FragmentFollowingAdapter  adapter;
+    private static RecyclerView recyclerView;
     public static FragmentFollowings newInstance ()
     {
         FragmentFollowings fragment = new FragmentFollowings();
@@ -49,14 +53,16 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
         idsOfShops=new ArrayList<>();
         idsOfShops.addAll(mainModelView.getAllFollowingShopsIds());
-
+        adapter=new FragmentFollowingAdapter();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.activity_main_sales container, false);
+        View view = inflater.inflate(R.layout.activity_main_sales, container, false);
+        recyclerView=view.findViewById(R.id.shops_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         new LoadFollowingShopsTovars().execute(idsOfShops);
         return view;
     }
@@ -109,7 +115,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         @Override
         protected void onPostExecute(List<Tovar> tovars) {
             super.onPostExecute(tovars);
-
+            adapter.setTovarList(tovars);
+            recyclerView.setAdapter(adapter);
         }
     }
 }

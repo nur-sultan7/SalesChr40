@@ -6,9 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-
-
-
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
 
@@ -20,7 +17,7 @@
 
 
         <ImageView
-            android:id="@+id/imageViewTovarImage"
+            android:id="@+id/FollowingTovarImage"
             android:layout_width="0dp"
             android:layout_height="190dp"
             android:adjustViewBounds="true"
@@ -81,11 +78,11 @@
             android:layout_width="wrap_content"
 
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="@id/imageViewTovarImage"
+            app:layout_constraintBottom_toBottomOf="@id/FollowingTovarImage"
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
-                android:id="@+id/tovar_cardview_old_price"
+                android:id="@+id/FollowingTovarOldPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -101,10 +98,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tovar_cardview_new_price"
+                android:id="@+id/FollowingTovarNewPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/tovar_cardview_old_price"
+                android:layout_above="@+id/FollowingTovarOldPrice"
                 android:shadowColor="@color/white"
                 android:shadowDx="1"
                 android:shadowDy="1"
@@ -119,8 +116,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/tovar_cardview_new_price"
-                android:layout_toRightOf="@+id/tovar_cardview_new_price">
+                android:layout_toEndOf="@+id/FollowingTovarNewPrice"
+                android:layout_toRightOf="@+id/FollowingTovarNewPrice">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -131,11 +128,11 @@
                     app:srcCompat="@drawable/skidka_img" />
 
                 <TextView
-                    android:id="@+id/tovar_cardview_skidka"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:id="@+id/FollowingTovarSkidka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="20"
                     android:textColor="@color/white"
                     android:textSize="17sp" />
@@ -145,12 +142,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewTovarImage"
+            app:layout_constraintBottom_toBottomOf="@+id/FollowingTovarImage"
             app:layout_constraintEnd_toStartOf="@+id/relativeLayout2"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/cardView_tovar_name"
+                android:id="@+id/FollowingTovarName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:shadowColor="@color/white"
@@ -163,12 +160,12 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:transitionName="selected_tovar_name"
-                app:layout_constraintBottom_toTopOf="@id/cardView_tovar_category"
+                app:layout_constraintBottom_toTopOf="@id/FollowingTovarCategory"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="20dp" />
 
             <TextView
-                android:id="@+id/cardView_tovar_category"
+                android:id="@+id/FollowingTovarCategory"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_height="wrap_content"
@@ -178,7 +175,7 @@
                 android:shadowRadius="2"
                 android:text="@string/title_tovar_category"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView_tovar_name"
+                app:layout_constraintTop_toBottomOf="@id/FollowingTovarName"
                 android:layout_marginLeft="20dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

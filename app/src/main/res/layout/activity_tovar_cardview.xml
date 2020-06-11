@@ -89,8 +89,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_toEndOf="@+id/cardView_shop_img"
-                        android:layout_toRightOf="@+id/cardView_shop_img"
+                        android:layout_toEndOf="@+id/following_shop_image"
+                        android:layout_toRightOf="@+id/following_shop_image"
                         android:maxLines="3"
                         android:paddingStart="10dp"
                         android:paddingLeft="10dp"
@@ -101,7 +101,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/shop_follow"
-                        app:layout_constraintStart_toEndOf="@+id/cardView_shop_img"
+                        app:layout_constraintStart_toEndOf="@+id/following_shop_image"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -134,7 +134,7 @@
                 android:paddingLeft="30dp"
                 android:paddingEnd="30dp"
                 android:paddingRight="30dp"
-                android:text="Tovaar Name"
+                android:text="Tovar Name"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:transitionName="selected_tovar_name" />

@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import com.akhmadov.saleschr2018.FavouriteCategory.FavouriteTovars;
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.Shop;
-import com.akhmadov.saleschr2018.trash.FavAdapter;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class Information  extends Fragment {
 
     private List<Shop> shops;
     ListView listView;
-    FavAdapter adapter;
+
     SearchView searchView;
     TextView selsinf;
     TextView text1;

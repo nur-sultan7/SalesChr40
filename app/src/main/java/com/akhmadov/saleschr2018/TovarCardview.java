@@ -136,10 +136,10 @@ public class TovarCardview extends AppCompatActivity {
                 break;
             case 1:
                 shop_layout.setVisibility(View.VISIBLE);
-                shop_name=findViewById(R.id.cardView_shop_name);
+                shop_name=findViewById(R.id.following_shop_name);
                 txt_shop_name=intent.getStringExtra("shop_name");
                 shop_name.setText(txt_shop_name);
-                shopImage=findViewById(R.id.cardView_shop_img);
+                shopImage=findViewById(R.id.following_shop_image);
                 txt_shopImg =intent.getStringExtra("shop_image");
                 Picasso.get().load(txt_shopImg)
                         .into(shopImage);
