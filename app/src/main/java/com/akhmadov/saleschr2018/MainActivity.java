@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_followings:
                 fragmentTransaction.replace(R.id.container,fragmentFollowings);
                 toolbar.setTitle("Подписки");
+                break;
             case R.id.nav_shops:
                 fragmentTransaction.replace(R.id.container,shopsCategoriesFragment);
                 toolbar.setTitle("Магазины");
