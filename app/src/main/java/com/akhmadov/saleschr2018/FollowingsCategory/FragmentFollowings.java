@@ -1,5 +1,6 @@
 package com.akhmadov.saleschr2018.FollowingsCategory;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +40,9 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     private static List<ParseObject> parseObjects;
     private static FragmentFollowingAdapter  adapter;
     private static RecyclerView recyclerView;
-    private static TextView textViewEmpty;
+    private  TextView textViewEmpty;
+    private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static FragmentFollowings newInstance ()
     {
@@ -58,6 +62,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         idsOfShops=new ArrayList<>();
         idsOfShops.addAll(mainModelView.getAllFollowingShopsIds());
         adapter=new FragmentFollowingAdapter();
+        adapter.setActivityDisplayMetrics(getContext());
+
     }
 
     @Nullable
@@ -67,6 +73,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         View view = inflater.inflate(R.layout.activity_main_sales, container, false);
         textViewEmpty=view.findViewById(R.id.empty_view);
         recyclerView=view.findViewById(R.id.shops_recycler);
+        progressBar=view.findViewById(R.id.shops_fragment_progressBar);
+        swipeRefreshLayout=view.findViewById(R.id.shops_swipe_refresh_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         new LoadFollowingShopsTovars().execute(idsOfShops);
         return view;
@@ -94,10 +102,18 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
 
     @Override
     public void onRefresh() {
-
+        swipeRefreshLayout.setRefreshing(true);
+        new LoadFollowingShopsTovars().execute(idsOfShops);
     }
-    private static  class  LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>,Void, List<Tovar>>
+   @SuppressLint("StaticFieldLeak")
+   protected  class  LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>,Void, List<Tovar>>
     {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
         @SafeVarargs
         @Override
         protected final List<Tovar> doInBackground(ArrayList<String>... lists) {
@@ -131,6 +147,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
                 textViewEmpty.setText("Подписки отсутствуют");
                 recyclerView.setVisibility(View.GONE);
             }
+            progressBar.setVisibility(View.GONE);
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 }

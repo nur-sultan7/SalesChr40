@@ -54,7 +54,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    CategoryTovarsAdapter adapter;
+    private CategoryTovarsAdapter adapter;
     private SearchView searchView;
     private ParseQueryTovars tovars_query;
     private ParseQuery shop_query;
@@ -353,6 +353,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         new RemoteDataTask().execute(orderBy);
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class RemoteDataTask extends AsyncTask<Integer, Void, Void> {
         @Override
         protected Void doInBackground(Integer... params) {
@@ -362,7 +363,6 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
             tovars = new ArrayList<>();
             tovars_query = new ParseQueryTovars(
                     "Tovars");
-
             if (!search_str.equals("")) {
                 tovars_query.whereMatches("tovar_opisanie", search_str, "i");
                 ParseQueryTovars parseQueryTovars = new ParseQueryTovars("Tovars");

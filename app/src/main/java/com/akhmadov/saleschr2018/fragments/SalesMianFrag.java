@@ -1,5 +1,6 @@
 package com.akhmadov.saleschr2018.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,23 +42,22 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
     private List<Shop> shops;
     private RecyclerView listView;
     private TextView textView_empty;
-    SalesAdapter adapter;
+    private SalesAdapter adapter;
     SearchView searchView;
-   private static AppCompatActivity ddd;
+    private static AppCompatActivity ddd;
     public List<Shop> shops_list;
     private static List<ParseObject> ob;
     private SwipeRefreshLayout swipeRefreshLayout;
-   private static ProgressBar progressBar;
+    @SuppressLint("StaticFieldLeak")
+    private static ProgressBar progressBar;
     private String cat_name;
     private int cat_id;
-
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     ///// Fire Base
-
 
 
     public SalesMianFrag() {
@@ -86,8 +86,6 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
         ddd = (AppCompatActivity) getActivity();
 
 
-
-
     }
 
     @Override
@@ -99,17 +97,15 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
 
         // progressBar.setVisibility(View.GONE);
     }
-     public void onResume(){
-         super.onResume();
-       //  progressBar.setVisibility(View.GONE);
 
-     }
+    public void onResume() {
+        super.onResume();
+        //  progressBar.setVisibility(View.GONE);
+
+    }
 
 
-
-
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem searchViewItem = menu.findItem(R.id.action_search);
         MenuItem infoViewItem = menu.findItem(R.id.action_info);
@@ -117,8 +113,8 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
         filterViewItem.setVisible(false);
         infoViewItem.setVisible(false);
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
-       // searchViewAndroidActionBar.setIconified(false);
-       // searchViewAndroidActionBar.onActionViewExpanded();
+        // searchViewAndroidActionBar.setIconified(false);
+        // searchViewAndroidActionBar.onActionViewExpanded();
         searchViewAndroidActionBar.setQueryHint("Магазин...");
         searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -135,8 +131,6 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
         });
 
 
-
-
     }
 
 
@@ -144,21 +138,21 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-View view =inflater.inflate(R.layout.activity_main_sales, container, false);
+        View view = inflater.inflate(R.layout.activity_main_sales, container, false);
 
 
-        listView=  view.findViewById(R.id.shops_recycler);
+        listView = view.findViewById(R.id.shops_recycler);
         textView_empty = view.findViewById(R.id.empty_view);
 
 
-       // adapter = new SalesAdapter(getActivity(),shops);
-       // listView.setAdapter(adapter);
+        // adapter = new SalesAdapter(getActivity(),shops);
+        // listView.setAdapter(adapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.shops_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        progressBar = (ProgressBar) view.findViewById(R.id.shops_fragment_progressBar) ;
+        progressBar = (ProgressBar) view.findViewById(R.id.shops_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
-       // progressBar.setVisibility(View.VISIBLE);
+        // progressBar.setVisibility(View.VISIBLE);
         //  swipeRefreshLayout.setRefreshing(false);
 
         swipeRefreshLayout.post(new Runnable() {
@@ -208,12 +202,11 @@ View view =inflater.inflate(R.layout.activity_main_sales, container, false);
         protected Void doInBackground(Void... params) {
 
 
-            shops=new ArrayList<>();
+            shops = new ArrayList<>();
             ParseQuery<ParseObject> shops_query = new ParseQuery<ParseObject>(
                     "Shops");
             shops_query.orderByDescending("_created_at");
-            if (cat_id!=0)
-            {
+            if (cat_id != 0) {
                 shops_query.whereContains("category_id", String.valueOf(cat_id));
             }
             try {
@@ -247,7 +240,7 @@ View view =inflater.inflate(R.layout.activity_main_sales, container, false);
         protected void onPreExecute() {
             super.onPreExecute();
 
-          //  progressBar.setVisibility(View.VISIBLE);
+            //  progressBar.setVisibility(View.VISIBLE);
         }
 
         //	@Override
@@ -259,12 +252,10 @@ View view =inflater.inflate(R.layout.activity_main_sales, container, false);
             swipeRefreshLayout.setRefreshing(false);
 
             listView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            if (shops.isEmpty())
-            {
+            if (shops.isEmpty()) {
                 listView.setVisibility(View.GONE);
                 textView_empty.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 adapter = new SalesAdapter(getActivity(), shops);
                 listView.setAdapter(adapter);
             }
@@ -272,8 +263,6 @@ View view =inflater.inflate(R.layout.activity_main_sales, container, false);
         }
 
     }
-
-
 
 
 }

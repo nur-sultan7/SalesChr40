@@ -1,6 +1,9 @@
 package com.akhmadov.saleschr2018.FollowingsCategory.adapters;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.akhmadov.saleschr2018.FollowingsCategory.FragmentFollowings;
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.Tovar;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -19,7 +24,16 @@ import java.util.List;
 
 public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollowingAdapter.ViewHolder> {
     private List<Tovar> tovarList;
-
+    private DisplayMetrics displayMetrics;
+    private static int deviceH;
+    private static int deviceW;
+    public void setActivityDisplayMetrics(Context context)
+        {
+        displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        deviceH = (int) (displayMetrics.heightPixels / 1.7);
+        deviceW =  (displayMetrics.widthPixels);
+    }
     public FragmentFollowingAdapter() {
         tovarList=new ArrayList<>();
     }
@@ -40,14 +54,30 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Tovar tovar = tovarList.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final Tovar tovar = tovarList.get(position);
         holder.textViewShopName.setText(tovar.getShop_name());
         Picasso.get().load(tovar.getShop_img())
                 .into(holder.imageViewShop);
         Picasso.get().load(tovar.getImage())
-                .into(holder.imageViewTovarImage);
-        holder.textViewTovarName.setText(tovar.getName());
+                .resize(deviceW,deviceH)
+                .centerCrop()
+                .into(holder.imageViewTovarImage, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                Picasso.get().load(tovar.getBig_image())
+                                        .noPlaceholder()
+                                        .resize(deviceW,deviceH)
+                                        .centerCrop()
+                                        .into(holder.imageViewTovarImage);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                            }
+                        });
+                        holder.textViewTovarName.setText(tovar.getName());
         holder.textViewTovarCategory.setText(tovar.getCategory());
         holder.textViewTovarNewPrice.setText(String.valueOf(tovar.getNew_cena()));
         holder.textViewTovarOldPrice.setText(String.valueOf(tovar.getOld_cena()));
@@ -76,6 +106,8 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
             imageViewShop=itemView.findViewById(R.id.following_shop_image);
             textViewShopName=itemView.findViewById(R.id.following_shop_name);
             imageViewTovarImage=itemView.findViewById(R.id.FollowingTovarImage);
+            imageViewTovarImage.getLayoutParams().height=deviceH;
+            imageViewTovarImage.getLayoutParams().width=deviceW;
             textViewTovarName=itemView.findViewById(R.id.FollowingTovarName);
             textViewTovarCategory= itemView.findViewById(R.id.FollowingTovarCategory);
             textViewTovarNewPrice=itemView.findViewById(R.id.FollowingTovarNewPrice);
