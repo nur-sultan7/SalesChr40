@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/FollowingTovarImage"
             android:layout_width="0dp"
-            android:layout_height="190dp"
+            android:layout_height="400dp"
             android:adjustViewBounds="true"
 
             android:contentDescription="@string/following_tovar_image_description"
@@ -55,6 +55,7 @@
             android:paddingEnd="10dp"
             android:paddingRight="10dp"
             android:text="@string/shop_name"
+            android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/view"
@@ -91,7 +92,7 @@
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-
+                android:textColor="@color/black"
                 android:padding="2dp"
                 android:text="@string/title_tovar_old_price"
                 android:textSize="12sp"
@@ -102,11 +103,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/FollowingTovarOldPrice"
+                android:textColor="@color/black"
+                android:layout_marginBottom="1dp"
+                android:padding="3dp"
                 android:shadowColor="@color/white"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:padding="3dp"
                 android:text="@string/title_tovar_new_price"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -155,7 +158,7 @@
                 android:shadowDx="2"
                 android:shadowRadius="2"
                 android:layout_marginStart="20dp"
-
+                android:textColor="@color/black"
                 android:text="Tovaar Name"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -169,6 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:shadowColor="@color/white"
                 android:shadowDx="1"
                 android:shadowDy="1"

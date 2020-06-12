@@ -35,7 +35,7 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_followings_item,parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_followings_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -49,10 +49,10 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
                 .into(holder.imageViewTovarImage);
         holder.textViewTovarName.setText(tovar.getName());
         holder.textViewTovarCategory.setText(tovar.getCategory());
-        holder.textViewTovarNewPrice.setText(tovar.getNew_cena());
-        holder.textViewTovarOldPrice.setText(tovar.getOld_cena());
+        holder.textViewTovarNewPrice.setText(String.valueOf(tovar.getNew_cena()));
+        holder.textViewTovarOldPrice.setText(String.valueOf(tovar.getOld_cena()));
         holder.textViewTovarOldPrice.setPaintFlags(holder.textViewTovarOldPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-        holder.textViewTovarSkidka.setText(tovar.getSkidka());
+        holder.textViewTovarSkidka.setText(String.valueOf(tovar.getSkidka())+"%");
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private MainModelView mainModelView;
@@ -36,6 +38,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     private static List<ParseObject> parseObjects;
     private static FragmentFollowingAdapter  adapter;
     private static RecyclerView recyclerView;
+    private static TextView textViewEmpty;
+
     public static FragmentFollowings newInstance ()
     {
         FragmentFollowings fragment = new FragmentFollowings();
@@ -61,6 +65,7 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_main_sales, container, false);
+        textViewEmpty=view.findViewById(R.id.empty_view);
         recyclerView=view.findViewById(R.id.shops_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         new LoadFollowingShopsTovars().execute(idsOfShops);
@@ -102,6 +107,7 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
                 queryTovars.whereContainedIn("shop_id",lists[0]);
                 queryTovars.orderByDescending("_created_at");
                 queryTovars.setLimit(20);
+                queryTovars.include("shop_object");
                 try {
                      parseObjects= queryTovars.find();
                 } catch (ParseException e) {
@@ -115,8 +121,16 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         @Override
         protected void onPostExecute(List<Tovar> tovars) {
             super.onPostExecute(tovars);
-            adapter.setTovarList(tovars);
-            recyclerView.setAdapter(adapter);
+            if (tovars!=null) {
+                adapter.setTovarList(tovars);
+                recyclerView.setAdapter(adapter);
+            }
+            else
+            {
+                textViewEmpty.setVisibility(View.VISIBLE);
+                textViewEmpty.setText("Подписки отсутствуют");
+                recyclerView.setVisibility(View.GONE);
+            }
         }
     }
 }

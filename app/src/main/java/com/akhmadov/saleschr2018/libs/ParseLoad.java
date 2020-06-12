@@ -41,8 +41,10 @@ public class ParseLoad {
             tovar.setShop_id(tovar_parse.getString("shop_id"));
             tovar.setShop_name(tovar_parse.getString("shop_name"));
             ParseObject shop_parse = tovar_parse.getParseObject("shop_object");
-            ParseFile shop_parse_image_file=shop_parse.getParseFile("shop_image");
-            tovar.setShop_img(shop_parse_image_file.getUrl());
+
+                ParseFile shop_parse_image_file = shop_parse.getParseFile("shop_image");
+                tovar.setShop_img(shop_parse_image_file.getUrl());
+
             tovar.setId_tovar(tovar_parse.getObjectId());
             tovars.add(tovar);
         }
