@@ -1,7 +1,9 @@
 package com.akhmadov.saleschr2018.FollowingsCategory;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,11 +11,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +30,7 @@ import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Tovar;
 import com.akhmadov.saleschr2018.libs.ParseLoad;
 import com.akhmadov.saleschr2018.libs.ParseQueryTovars;
+import com.akhmadov.saleschr2018.utils.DataUtil;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
@@ -63,6 +68,19 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
 
         adapter=new FragmentFollowingAdapter();
         adapter.setActivityDisplayMetrics(getContext());
+        adapter.setOnItemClickListener(new FragmentFollowingAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, ImageView imageView, int position, String currentImage) {
+                Intent intent = DataUtil.getIntentTovarCardView(getContext(), 1, adapter.getItemByPosition(position), currentImage);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    view.setTransitionName("selected_tovar_image");
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imageView, view.getTransitionName());
+                    startActivity(intent, optionsCompat.toBundle());
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -82,6 +100,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
                 android.R.color.holo_red_light);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        progressBar.setVisibility(View.VISIBLE);
+        dataLoad();
         return view;
     }
 
@@ -89,8 +109,7 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onStart() {
         super.onStart();
-        progressBar.setVisibility(View.VISIBLE);
-       dataLoad();
+
     }
     @SuppressWarnings("unchecked")
     private void dataLoad()

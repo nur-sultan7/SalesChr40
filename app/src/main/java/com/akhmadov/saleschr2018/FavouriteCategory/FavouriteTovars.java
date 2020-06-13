@@ -222,11 +222,11 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         adapter.setOnItemClickListener(new FavouriteTovarsAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, ImageView imageView, int position, String currentImage) {
-                Intent intent = DataUtil.getIntentTovarCardView(getContext(),1,adapter.getItemByPosition(position), currentImage);
+                Intent intent = DataUtil.getIntentTovarCardView(getContext(), 1, adapter.getItemByPosition(position), currentImage);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     view.setTransitionName("selected_tovar_image");
                     ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imageView, view.getTransitionName());
-                   startActivity(intent, optionsCompat.toBundle());
+                    startActivity(intent, optionsCompat.toBundle());
                 } else {
                     startActivity(intent);
                 }

@@ -25,14 +25,33 @@ import java.util.List;
 public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollowingAdapter.ViewHolder> {
     private List<Tovar> tovarList;
     private DisplayMetrics displayMetrics;
-    private static int deviceH;
-    private static int deviceW;
+    private  int deviceH;
+    private  int deviceW;
+    private  Paint paint;
+    private  OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener
+    {
+        void onClick(View view,ImageView imageView, int position, String currentImage);
+    }
+    public Tovar getItemByPosition(int position)
+    {
+        return tovarList.get(position);
+    }
+
     public void setActivityDisplayMetrics(Context context)
         {
         displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         deviceH = (int) (displayMetrics.heightPixels / 1.7);
         deviceW =  (displayMetrics.widthPixels);
+        paint= new Paint();
+        paint.setColor(context.getResources().getColor(R.color.primary));
+        paint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
     }
     public FragmentFollowingAdapter() {
         tovarList=new ArrayList<>();
@@ -82,7 +101,8 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
         holder.textViewTovarCategory.setText(tovar.getCategory());
         holder.textViewTovarNewPrice.setText(String.valueOf(tovar.getNew_cena()));
         holder.textViewTovarOldPrice.setText(String.valueOf(tovar.getOld_cena()));
-        holder.textViewTovarOldPrice.setPaintFlags(holder.textViewTovarOldPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+
+        holder.textViewTovarOldPrice.setPaintFlags(paint.getFlags());
         holder.textViewTovarSkidka.setText(String.valueOf(tovar.getSkidka())+"%");
     }
 
@@ -91,7 +111,7 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
         return tovarList.size();
     }
 
-     static class ViewHolder extends RecyclerView.ViewHolder
+      class ViewHolder extends RecyclerView.ViewHolder
     {
         ImageView imageViewShop;
         TextView textViewShopName;
@@ -114,7 +134,15 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
             textViewTovarNewPrice=itemView.findViewById(R.id.FollowingTovarNewPrice);
             textViewTovarOldPrice=itemView.findViewById(R.id.FollowingTovarOldPrice);
             textViewTovarSkidka=itemView.findViewById(R.id.FollowingTovarSkidka);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickListener!=null)
+                    {
+                        onItemClickListener.onClick(view, imageViewTovarImage,getAdapterPosition(), imageViewTovarImage.getDrawable().toString());
+                    }
+                }
+            });
         }
     }
 }
