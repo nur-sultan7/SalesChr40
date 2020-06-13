@@ -121,7 +121,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
 
 
         toolbar.setTitle(strtext);
-        swipeRefreshLayout = view.findViewById(R.id.shops_swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.tovars_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
                                     @Override

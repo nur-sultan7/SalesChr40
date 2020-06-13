@@ -196,7 +196,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         progressBar =  view.findViewById(R.id.tovars_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView = view.findViewById(R.id.tovars_recyclerview);
-        swipeRefreshLayout =  view.findViewById(R.id.shops_swipe_refresh_layout);
+        swipeRefreshLayout =  view.findViewById(R.id.tovars_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
                                     @Override

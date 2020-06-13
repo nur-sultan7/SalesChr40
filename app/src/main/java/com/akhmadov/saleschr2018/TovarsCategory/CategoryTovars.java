@@ -174,7 +174,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         cat_name=getArguments().getString("cat_name");
         cat_id=getArguments().getString("cat_id");
         toolbar.setTitle(cat_name);
-        swipeRefreshLayout = view.findViewById(R.id.shops_swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.tovars_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
                                     @Override

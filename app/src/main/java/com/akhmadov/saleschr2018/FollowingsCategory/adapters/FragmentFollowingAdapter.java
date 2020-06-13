@@ -44,6 +44,7 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
 
     public void setTovarList(List<Tovar> tovarList) {
         this.tovarList = tovarList;
+        notifyDataSetChanged();
     }
 
     @NonNull

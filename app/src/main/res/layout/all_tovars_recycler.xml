@@ -8,7 +8,7 @@
 
     >
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/shops_swipe_refresh_layout"
+        android:id="@+id/tovars_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <androidx.recyclerview.widget.RecyclerView

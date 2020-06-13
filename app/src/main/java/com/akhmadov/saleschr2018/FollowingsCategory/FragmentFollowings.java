@@ -60,7 +60,7 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         }
         mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
         idsOfShops=new ArrayList<>();
-        idsOfShops.addAll(mainModelView.getAllFollowingShopsIds());
+
         adapter=new FragmentFollowingAdapter();
         adapter.setActivityDisplayMetrics(getContext());
 
@@ -75,14 +75,34 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         recyclerView=view.findViewById(R.id.shops_recycler);
         progressBar=view.findViewById(R.id.shops_fragment_progressBar);
         swipeRefreshLayout=view.findViewById(R.id.shops_swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        new LoadFollowingShopsTovars().execute(idsOfShops);
+        recyclerView.setAdapter(adapter);
         return view;
     }
+
 
     @Override
     public void onStart() {
         super.onStart();
+        progressBar.setVisibility(View.VISIBLE);
+       dataLoad();
+    }
+    @SuppressWarnings("unchecked")
+    private void dataLoad()
+    {
+        idsOfShops.clear();
+        idsOfShops.addAll(mainModelView.getAllFollowingShopsIds());
+        new LoadFollowingShopsTovars().execute(idsOfShops);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -100,10 +120,11 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
-        new LoadFollowingShopsTovars().execute(idsOfShops);
+        dataLoad();
     }
    @SuppressLint("StaticFieldLeak")
    protected  class  LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>,Void, List<Tovar>>
@@ -111,7 +132,7 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+
         }
 
         @SafeVarargs
@@ -139,7 +160,6 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
             super.onPostExecute(tovars);
             if (tovars!=null) {
                 adapter.setTovarList(tovars);
-                recyclerView.setAdapter(adapter);
             }
             else
             {
