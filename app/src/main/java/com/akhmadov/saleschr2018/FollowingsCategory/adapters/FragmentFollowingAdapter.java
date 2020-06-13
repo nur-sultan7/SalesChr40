@@ -38,6 +38,10 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
     {
         void onClick(View view,ImageView imageView, int position, String currentImage);
     }
+    public interface OnShopClickListener
+    {
+        void onClick();
+    }
     public Tovar getItemByPosition(int position)
     {
         return tovarList.get(position);

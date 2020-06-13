@@ -98,7 +98,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setItemViewCacheSize(8);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);
         dataLoad();
