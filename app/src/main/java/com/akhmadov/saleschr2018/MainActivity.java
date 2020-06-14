@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         switch (id)
         {
             case R.id.nav_followings:
-                fragmentTransaction.replace(R.id.container,fragmentFollowings);
+                fragmentTransaction.replace(R.id.container,fragmentFollowings,"following");
                 toolbar.setTitle("Подписки");
                 break;
             case R.id.nav_shops:

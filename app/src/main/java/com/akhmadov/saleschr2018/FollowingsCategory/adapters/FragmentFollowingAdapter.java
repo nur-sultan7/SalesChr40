@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.akhmadov.saleschr2018.FollowingsCategory.FragmentFollowings;
@@ -29,6 +30,11 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
     private  int deviceW;
     private  Paint paint;
     private  OnItemClickListener onItemClickListener;
+    private OnShopClickListener onShopClickListener;
+
+    public void setOnShopClickListener(OnShopClickListener onShopClickListener) {
+        this.onShopClickListener = onShopClickListener;
+    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -40,8 +46,10 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
     }
     public interface OnShopClickListener
     {
-        void onClick();
+        void onClick(String shopId, String shopName, String shopImage);
     }
+
+
     public Tovar getItemByPosition(int position)
     {
         return tovarList.get(position);
@@ -125,6 +133,7 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
         TextView textViewTovarSkidka;
         TextView textViewTovarName;
         TextView textViewTovarCategory;
+        ConstraintLayout constraintLayoutShop;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -138,6 +147,17 @@ public class FragmentFollowingAdapter extends RecyclerView.Adapter<FragmentFollo
             textViewTovarNewPrice=itemView.findViewById(R.id.FollowingTovarNewPrice);
             textViewTovarOldPrice=itemView.findViewById(R.id.FollowingTovarOldPrice);
             textViewTovarSkidka=itemView.findViewById(R.id.FollowingTovarSkidka);
+            constraintLayoutShop=itemView.findViewById(R.id.FollowingShopLayout);
+            constraintLayoutShop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onShopClickListener!=null)
+                    {
+                        Tovar tovar = getItemByPosition(getAdapterPosition());
+                        onShopClickListener.onClick(tovar.getShop_id(),tovar.getShop_name(),tovar.getShop_img());
+                    }
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

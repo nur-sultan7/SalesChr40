@@ -12,7 +12,7 @@ import com.akhmadov.saleschr2018.data.Tovar;
 * */
 
 public class DataUtil {
-    public static Intent getIntentTovarCardView(Context mContext, int fromCategory, Tovar tovar, String currentImage)
+    public static Intent setIntentTovarCardView(Context mContext, int fromCategory, Tovar tovar, String currentImage)
     {
         Intent intent = new Intent(mContext, TovarCardview.class);
         intent.putExtra("from_category",fromCategory);

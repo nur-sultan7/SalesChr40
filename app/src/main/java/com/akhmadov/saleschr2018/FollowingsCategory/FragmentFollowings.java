@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import com.akhmadov.saleschr2018.FollowingsCategory.adapters.FragmentFollowingAd
 import com.akhmadov.saleschr2018.R;
 import com.akhmadov.saleschr2018.data.MainModelView;
 import com.akhmadov.saleschr2018.data.Tovar;
+import com.akhmadov.saleschr2018.fragments.TovarsRecyclerFrag;
 import com.akhmadov.saleschr2018.libs.ParseLoad;
 import com.akhmadov.saleschr2018.libs.ParseQueryTovars;
 import com.akhmadov.saleschr2018.utils.DataUtil;
@@ -36,7 +38,6 @@ import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private MainModelView mainModelView;
@@ -48,6 +49,7 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     private  TextView textViewEmpty;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private boolean isCalled=false;
 
     public static FragmentFollowings newInstance ()
     {
@@ -65,23 +67,8 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         }
         mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
         idsOfShops=new ArrayList<>();
-
         adapter=new FragmentFollowingAdapter();
-        adapter.setActivityDisplayMetrics(getContext());
-        adapter.setOnItemClickListener(new FragmentFollowingAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(View view, ImageView imageView, int position, String currentImage) {
-                Intent intent = DataUtil.getIntentTovarCardView(getContext(), 1, adapter.getItemByPosition(position), currentImage);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    view.setTransitionName("selected_tovar_image");
-                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imageView, view.getTransitionName());
-                    startActivity(intent, optionsCompat.toBundle());
-                } else {
-                    startActivity(intent);
-                }
-            }
-        });
-
+        adapter.setActivityDisplayMetrics(requireContext());
     }
 
     @Nullable
@@ -99,19 +86,57 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setItemViewCacheSize(8);
+        recyclerView.setItemViewCacheSize(9);
         recyclerView.setAdapter(adapter);
-        progressBar.setVisibility(View.VISIBLE);
-        dataLoad();
+        if (!isCalled) {
+            progressBar.setVisibility(View.VISIBLE);
+            dataLoad();
+            isCalled=true;
+        }
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        adapter.setOnItemClickListener(new FragmentFollowingAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, ImageView imageView, int position, String currentImage) {
+                Intent intent = DataUtil.setIntentTovarCardView(getContext(), 1, adapter.getItemByPosition(position), currentImage);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    view.setTransitionName("selected_tovar_image");
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), imageView, view.getTransitionName());
+                    startActivity(intent, optionsCompat.toBundle());
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
+        adapter.setOnShopClickListener(new FragmentFollowingAdapter.OnShopClickListener() {
+            @Override
+            public void onClick(String shopId, String shopName, String shopImage) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+                Fragment tovarsFrag = new TovarsRecyclerFrag();
+                Fragment currentFragment = fragmentManager.findFragmentByTag("following");
+                Bundle bundle = new Bundle();
+                bundle.putString("shop", shopName);
+                bundle.putString("shop_id", shopId);
+                bundle.putString("shop_img", shopImage);
+                tovarsFrag.setArguments(bundle);
+
+                assert currentFragment != null;
+                fragmentManager.beginTransaction().add(R.id.container, tovarsFrag).hide(currentFragment).addToBackStack(null).commit();
+            }
+        });
+    }
 
     @Override
     public void onStart() {
         super.onStart();
 
+
     }
+
     @SuppressWarnings("unchecked")
     private void dataLoad()
     {
