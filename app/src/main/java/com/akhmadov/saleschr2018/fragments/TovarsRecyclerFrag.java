@@ -49,7 +49,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChangeListener, SwipeRefreshLayout.OnRefreshListener {
+public class TovarsRecyclerFrag extends Fragment implements  SwipeRefreshLayout.OnRefreshListener {
 
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -86,39 +86,11 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         View view = inflater.inflate(R.layout.all_tovars_recycler, container, false);
         progressBar = view.findViewById(R.id.tovars_fragment_progressBar);
 
-        final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        final Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
         String strtext = getArguments().getString("shop");
         shop_id = getArguments().getString("shop_id");
         shop_name = getArguments().getString("shop");
         shop_img = getArguments().getString("shop_img");
-
-        if (getArguments().getInt("isFromFavourite",0)==1)
-        {
-            shop_query = new ParseQuery(
-                    "Shops");
-            shop_query.whereEqualTo("objectId",shop_id);
-            shop_query.getFirstInBackground(new GetCallback() {
-                @Override
-                public void done(ParseObject object, ParseException e) {
-                    shop_location=object.getString("shop_location");
-                    shop_description=object.getString("shop_description");
-                    shop_tel=object.getString("shop_tel");
-                    shop_inst=object.getString("shop_inst");
-                }
-                @Override
-                public void done(Object o, Throwable throwable) {
-                }
-            });
-        }
-        else
-        {
-            shop_location = getArguments().getString("shop_location");
-            shop_description = getArguments().getString("shop_description");
-            shop_tel = getArguments().getString("shop_tel");
-            shop_inst = getArguments().getString("shop_inst");
-        }
-
-
 
         toolbar.setTitle(strtext);
         swipeRefreshLayout = view.findViewById(R.id.tovars_swipe_refresh_layout);
@@ -136,6 +108,16 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         adapter.setFromCategory(0);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemViewCacheSize(12);
+
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
         adapter.setOnLikeClickListener(new CategoryTovarsAdapter.OnLikeClickListener() {
             @Override
             public void onClick(int position) {
@@ -151,14 +133,9 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
 
             }
         });
-        new RemoteDataTask().execute(0);
-        return view;
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
         isfollowing =mainModelView.getFollowingShopById(shop_id) != null;
+        new RemoteDataTask().execute(orderBy);
     }
 
     @Override
@@ -217,7 +194,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                getActivity().invalidateOptionsMenu ();
+               requireActivity().invalidateOptionsMenu ();
                 search_str = "";
                 new RemoteDataTask().execute(orderBy);
                 return true;
@@ -335,17 +312,6 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         optionsMenu.show();
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-    }
 
     @Override
     public void onRefresh() {
@@ -353,7 +319,7 @@ public class TovarsRecyclerFrag extends Fragment implements ViewPager.OnPageChan
         new RemoteDataTask().execute(orderBy);
     }
 
-    @SuppressLint("StaticFieldLeak")
+
     public class RemoteDataTask extends AsyncTask<Integer, Void, Void> {
         @Override
         protected Void doInBackground(Integer... params) {

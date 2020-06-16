@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -44,30 +45,31 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     private ArrayList<String> idsOfShops;
     private static List<Tovar> tovarList;
     private static List<ParseObject> parseObjects;
-    private static FragmentFollowingAdapter  adapter;
+    private static FragmentFollowingAdapter adapter;
     private static RecyclerView recyclerView;
-    private  TextView textViewEmpty;
+    private TextView textViewEmpty;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private boolean isCalled=false;
+    private Toolbar toolbar;
 
-    public static FragmentFollowings newInstance ()
-    {
+
+    public static FragmentFollowings newInstance() {
         FragmentFollowings fragment = new FragmentFollowings();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments()!=null)
-        {
+        if (getArguments() != null) {
 
         }
-        mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
-        idsOfShops=new ArrayList<>();
-        adapter=new FragmentFollowingAdapter();
+        toolbar = requireActivity().findViewById(R.id.toolbar);
+        mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
+        idsOfShops = new ArrayList<>();
+        adapter = new FragmentFollowingAdapter();
         adapter.setActivityDisplayMetrics(requireContext());
     }
 
@@ -76,10 +78,10 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_main_sales, container, false);
-        textViewEmpty=view.findViewById(R.id.empty_view);
-        recyclerView=view.findViewById(R.id.shops_recycler);
-        progressBar=view.findViewById(R.id.shops_fragment_progressBar);
-        swipeRefreshLayout=view.findViewById(R.id.shops_swipe_refresh_layout);
+        textViewEmpty = view.findViewById(R.id.empty_view);
+        recyclerView = view.findViewById(R.id.shops_recycler);
+        progressBar = view.findViewById(R.id.shops_fragment_progressBar);
+        swipeRefreshLayout = view.findViewById(R.id.shops_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -88,11 +90,10 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemViewCacheSize(9);
         recyclerView.setAdapter(adapter);
-        if (!isCalled) {
-            progressBar.setVisibility(View.VISIBLE);
-            dataLoad();
-            isCalled=true;
-        }
+
+        progressBar.setVisibility(View.VISIBLE);
+        dataLoad();
+
         return view;
     }
 
@@ -134,12 +135,10 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     public void onStart() {
         super.onStart();
 
-
     }
 
     @SuppressWarnings("unchecked")
-    private void dataLoad()
-    {
+    private void dataLoad() {
         idsOfShops.clear();
         idsOfShops.addAll(mainModelView.getAllFollowingShopsIds());
         new LoadFollowingShopsTovars().execute(idsOfShops);
@@ -148,6 +147,14 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onResume() {
         super.onResume();
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden)
+            toolbar.setTitle("Подписки");
     }
 
     @Override
@@ -171,9 +178,9 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         swipeRefreshLayout.setRefreshing(true);
         dataLoad();
     }
-   @SuppressLint("StaticFieldLeak")
-   protected  class  LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>,Void, List<Tovar>>
-    {
+
+    @SuppressLint("StaticFieldLeak")
+    protected class LoadFollowingShopsTovars extends AsyncTask<ArrayList<String>, Void, List<Tovar>> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -183,19 +190,18 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         @SafeVarargs
         @Override
         protected final List<Tovar> doInBackground(ArrayList<String>... lists) {
-            if (lists[0]!=null && lists[0].size()>0)
-            {
+            if (lists[0] != null && lists[0].size() > 0) {
                 ParseQueryTovars queryTovars = new ParseQueryTovars("Tovars");
-                queryTovars.whereContainedIn("shop_id",lists[0]);
+                queryTovars.whereContainedIn("shop_id", lists[0]);
                 queryTovars.orderByDescending("_created_at");
                 queryTovars.setLimit(20);
                 queryTovars.include("shop_object");
                 try {
-                     parseObjects= queryTovars.find();
+                    parseObjects = queryTovars.find();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                tovarList= ParseLoad.RetrievingTovars(parseObjects);
+                tovarList = ParseLoad.RetrievingTovars(parseObjects);
             }
             return tovarList;
         }
@@ -203,11 +209,9 @@ public class FragmentFollowings extends Fragment implements SwipeRefreshLayout.O
         @Override
         protected void onPostExecute(List<Tovar> tovars) {
             super.onPostExecute(tovars);
-            if (tovars!=null) {
+            if (tovars != null) {
                 adapter.setTovarList(tovars);
-            }
-            else
-            {
+            } else {
                 textViewEmpty.setVisibility(View.VISIBLE);
                 textViewEmpty.setText("Подписки отсутствуют");
                 recyclerView.setVisibility(View.GONE);
