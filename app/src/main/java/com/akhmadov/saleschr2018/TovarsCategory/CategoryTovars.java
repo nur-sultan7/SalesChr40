@@ -171,8 +171,8 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         progressBar = view.findViewById(R.id.tovars_fragment_progressBar) ;
         progressBar.setVisibility(View.VISIBLE);
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        cat_name=getArguments().getString("cat_name");
-        cat_id=getArguments().getString("cat_id");
+        //cat_name=getArguments().getString("cat_name");
+        //cat_id=getArguments().getString("cat_id");
         toolbar.setTitle(cat_name);
         swipeRefreshLayout = view.findViewById(R.id.tovars_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
