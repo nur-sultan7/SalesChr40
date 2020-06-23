@@ -191,7 +191,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.all_tovars_recycler, container, false);
-        final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        final Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Избранные товары");
         progressBar =  view.findViewById(R.id.tovars_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -225,7 +225,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
                 Intent intent = DataUtil.setIntentTovarCardView(getContext(), 1, adapter.getItemByPosition(position), currentImage);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     view.setTransitionName("selected_tovar_image");
-                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imageView, view.getTransitionName());
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), imageView, view.getTransitionName());
                     startActivity(intent, optionsCompat.toBundle());
                 } else {
                     startActivity(intent);
