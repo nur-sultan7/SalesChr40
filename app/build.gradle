@@ -6,8 +6,8 @@ android {
         applicationId "com.akhmadov.saleschr2018"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 5
-        versionName "1.5"
+        versionCode 7
+        versionName "1.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
