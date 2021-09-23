@@ -49,7 +49,6 @@ public class TovarCardview extends AppCompatActivity {
     private static boolean isFollowingShop;
 
 
-
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class TovarCardview extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        modelView= ViewModelProviders.of(this).get(MainModelView.class);
+        modelView = ViewModelProviders.of(this).get(MainModelView.class);
         TextView name = findViewById(R.id.cardView_tovar_name);
         TextView category = findViewById(R.id.cardView_tovar_category);
         TextView old_cena = findViewById(R.id.tovar_cardview_old_price);
@@ -89,12 +88,12 @@ public class TovarCardview extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        fromCategory=intent.getIntExtra("from_category",0);
+        fromCategory = intent.getIntExtra("from_category", 0);
         name.setText(intent.getExtras().getString("tovar_name"));
         category.setText(intent.getExtras().getString("tovar_category"));
         old_cena.setText(intent.getExtras().getString("old_cena"));
         old_cena.setPaintFlags(old_cena.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        new_cena.setText(String.valueOf( intent.getExtras().getInt("new_cena")));
+        new_cena.setText(String.valueOf(intent.getExtras().getInt("new_cena")));
         String skidka_txt = intent.getExtras().getString("skidka");
         skidka.setText(intent.getExtras().getInt("skidka") + "%");
         if (intent.getExtras().getString("tovar_description") == null) {
@@ -129,37 +128,33 @@ public class TovarCardview extends AppCompatActivity {
         viewPager.getLayoutParams().height = (int) (deviceheight / 2.25);
         frameLayout.getLayoutParams().height = (int) (deviceheight / 2.25);
 
-        switch (fromCategory)
-        {
+        switch (fromCategory) {
             case 0:
                 shop_layout.setVisibility(View.GONE);
                 break;
             case 1:
                 shop_layout.setVisibility(View.VISIBLE);
-                shop_name=findViewById(R.id.following_shop_name);
-                txt_shop_name=intent.getStringExtra("shop_name");
+                shop_name = findViewById(R.id.following_shop_name);
+                txt_shop_name = intent.getStringExtra("shop_name");
                 shop_name.setText(txt_shop_name);
-                shopImage=findViewById(R.id.following_shop_image);
-                txt_shopImg =intent.getStringExtra("shop_image");
+                shopImage = findViewById(R.id.following_shop_image);
+                txt_shopImg = intent.getStringExtra("shop_image");
                 Picasso.get().load(txt_shopImg)
                         .into(shopImage);
-                shopFollow=findViewById(R.id.shop_follow);
-                shop_id=intent.getStringExtra("shop_id");
+                shopFollow = findViewById(R.id.shop_follow);
+                shop_id = intent.getStringExtra("shop_id");
                 final FollowingShop followingShop = modelView.getFollowingShopById(shop_id);
-                isFollowingShop= followingShop != null;
+                isFollowingShop = followingShop != null;
                 checkIsFollowingShop(isFollowingShop);
                 shopFollow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (isFollowingShop)
-                        {
-                            isFollowingShop=false;
+                        if (isFollowingShop) {
+                            isFollowingShop = false;
                             modelView.deleteFollowingShop(shop_id);
-                        }
-                        else
-                        {
-                            isFollowingShop=true;
-                            modelView.insertFollowingShop(new FollowingShop(shop_id,txt_shop_name,txt_shopImg));
+                        } else {
+                            isFollowingShop = true;
+                            modelView.insertFollowingShop(new FollowingShop(shop_id, txt_shop_name, txt_shopImg));
                         }
                         checkIsFollowingShop(isFollowingShop);
                     }
@@ -212,19 +207,17 @@ public class TovarCardview extends AppCompatActivity {
             right.setVisibility(View.VISIBLE);
 
     }
-    public void checkIsFollowingShop(boolean isFollowingShop)
-    {
+
+    public void checkIsFollowingShop(boolean isFollowingShop) {
         if (isFollowingShop) {
             shopFollow.setText("Отписаться");
             shopFollow.setBackground(getResources().getDrawable(R.drawable.rouded_red_background_textview));
 
-        }
-        else {
+        } else {
             shopFollow.setText("Подписаться");
             shopFollow.setBackground(getResources().getDrawable(R.drawable.rouded_blue_background_textview));
         }
     }
-
 
 
 }

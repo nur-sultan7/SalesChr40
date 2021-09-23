@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnRefreshListener {
+public class FavouriteTovars extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -94,21 +94,21 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         filter_dialog.price_asc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkChoice=2;
-               setFavouriteByOrder("new_cena ASC");
+                checkChoice = 2;
+                setFavouriteByOrder("new_cena ASC");
             }
         });
         filter_dialog.price_desc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkChoice=1;
+                checkChoice = 1;
                 setFavouriteByOrder("new_cena DESC");
             }
         });
         filter_dialog.skidka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkChoice=3;
+                checkChoice = 3;
                 setFavouriteByOrder("skidka DESC");
 
             }
@@ -116,16 +116,16 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         filter_dialog.by_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkChoice=0;
+                checkChoice = 0;
                 setFavouriteByOrder("uniqueId DESC");
             }
         });
-        orderBy="uniqueId DESC";
-        checkChoice=0;
+        orderBy = "uniqueId DESC";
+        checkChoice = 0;
     }
-    private void setFavouriteByOrder(String orderBy)
-    {
-        FavouriteTovars.orderBy =orderBy;
+
+    private void setFavouriteByOrder(String orderBy) {
+        FavouriteTovars.orderBy = orderBy;
         loadDataByOrderBy(FavouriteTovars.orderBy);
         filter_dialog.dismiss();
     }
@@ -147,8 +147,8 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                getActivity().invalidateOptionsMenu ();
-              //  search_str = "";
+                getActivity().invalidateOptionsMenu();
+                //  search_str = "";
                 setFavouriteByOrder(orderBy);
                 return true;
             }
@@ -164,7 +164,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
 
             @Override
             public boolean onQueryTextChange(String newText) {
-            //    adapter.getFilter().filter(newText);
+                //    adapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -174,8 +174,7 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-       switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.action_filter:
                 filter_dialog.showDialogFilter();
                 filter_dialog.checkChoice(checkChoice);
@@ -193,10 +192,10 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         View view = inflater.inflate(R.layout.all_tovars_recycler, container, false);
         final Toolbar toolbar = requireActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Избранные товары");
-        progressBar =  view.findViewById(R.id.tovars_fragment_progressBar);
+        progressBar = view.findViewById(R.id.tovars_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
         recyclerView = view.findViewById(R.id.tovars_recyclerview);
-        swipeRefreshLayout =  view.findViewById(R.id.tovars_swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.tovars_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
                                     @Override
@@ -252,14 +251,13 @@ public class FavouriteTovars extends Fragment implements  SwipeRefreshLayout.OnR
         swipeRefreshLayout.setRefreshing(true);
         loadDataByOrderBy(orderBy);
     }
-    private void loadDataByOrderBy(String orderBy)
-    {
+
+    private void loadDataByOrderBy(String orderBy) {
         tovars.clear();
         tovars.addAll(mainModelView.getFavouriteTovars(orderBy));
         adapter.setFavouriteTovarsList(tovars);
         swipeRefreshLayout.setRefreshing(false);
     }
-
 
 
 }

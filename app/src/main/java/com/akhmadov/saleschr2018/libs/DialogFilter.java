@@ -50,24 +50,25 @@ public class DialogFilter extends Dialog {
     protected DialogFilter(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
-    public void showDialogFilter()
-    {
+
+    public void showDialogFilter() {
 
         Window window = this.getWindow();
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        window.getAttributes().windowAnimations= R.style.DialogAnimation;
+        window.getAttributes().windowAnimations = R.style.DialogAnimation;
         this.setTitle(null);
         this.setCancelable(true);
         this.getWindow().setGravity(Gravity.BOTTOM);
         this.show();
     }
-    public void checkChoice(Integer orderId){
+
+    public void checkChoice(Integer orderId) {
         check_new.setVisibility(View.GONE);
         check_price_asc.setVisibility(View.GONE);
         check_price_desc.setVisibility(View.GONE);
         check_sale.setVisibility(View.GONE);
-        switch (orderId){
+        switch (orderId) {
             case 0:
                 check_new.setVisibility(View.VISIBLE);
                 break;

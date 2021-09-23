@@ -44,12 +44,12 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
 
     // Declare Variables
     private Context context;
-    private List<Shop> Shopslist ;
+    private List<Shop> Shopslist;
     Filter filter;
-    private  static  int position_about=-1;
+    private static int position_about = -1;
 
     SalesAdapter(Context context,
-                       List<Shop> Shopslist) {
+                 List<Shop> Shopslist) {
         this.context = context;
         this.Shopslist = Shopslist;
     }
@@ -57,7 +57,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
     @Override
     public Filter getFilter() {
 
-        if(filter == null)
+        if (filter == null)
             filter = new CheeseFilter();
         return filter;
     }
@@ -112,7 +112,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
     public SalesAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(context);
-        view = mInflater.inflate(R.layout.sales_shops_item_restyle,parent,false);
+        view = mInflater.inflate(R.layout.sales_shops_item_restyle, parent, false);
         return new SalesAdapter.MyViewHolder(view);
     }
 
@@ -121,8 +121,8 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
         final Shop shop = Shopslist.get(position);
         holder.shop_name.setText(shop.getName());
         holder.location.setText(shop.getLocation());
-        if (shop.getDescription()!=null) {
-            holder.description.setText(shop.getDescription().equals("null")?"Отсутствует описание":shop.getDescription());
+        if (shop.getDescription() != null) {
+            holder.description.setText(shop.getDescription().equals("null") ? "Отсутствует описание" : shop.getDescription());
         }
         String image_st = shop.getImage();
         Picasso.get()
@@ -141,34 +141,32 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
                 Bundle bundle = new Bundle();
                 bundle.putString("shop", shop.getName());
                 bundle.putString("shop_id", shop.getShop_id());
-                bundle.putString("shop_img",shop.getBig_image());
-                bundle.putString("shop_location",shop.getLocation());
+                bundle.putString("shop_img", shop.getBig_image());
+                bundle.putString("shop_location", shop.getLocation());
                 bundle.putString("shop_tel", shop.getTel());
-                bundle.putString("shop_description",shop.getDescription());
-                bundle.putString("shop_inst",shop.getInst());
-               // bundle.putString("shop",shop.);
+                bundle.putString("shop_description", shop.getDescription());
+                bundle.putString("shop_inst", shop.getInst());
+                // bundle.putString("shop",shop.);
                 tovarsFrag.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, tovarsFrag).addToBackStack(null).commit();
             }
         });
-        ((ViewGroup)holder.root_anim).getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+        ((ViewGroup) holder.root_anim).getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
 
-        if (shop.isPosition_about())
-        {
+        if (shop.isPosition_about()) {
             holder.shop_about.setVisibility(View.VISIBLE);
             holder.animation.stop();
-            ((AnimationDrawable)( holder.shop_about_btn_image.getBackground())).stop();
+            ((AnimationDrawable) (holder.shop_about_btn_image.getBackground())).stop();
             holder.shop_about_btn_image.setBackgroundDrawable(null);
             holder.shop_about_btn_image.setBackgroundResource(R.drawable.anim_shops_about_revers);
             holder.description.setMaxLines(100);
             holder.description.setEllipsize(null);
 
 
-        }
-        else {
+        } else {
             holder.shop_about.setVisibility(View.GONE);
-            ((AnimationDrawable)( holder.shop_about_btn_image.getBackground())).stop();
+            ((AnimationDrawable) (holder.shop_about_btn_image.getBackground())).stop();
             holder.shop_about_btn_image.setBackgroundDrawable(null);
             holder.shop_about_btn_image.setBackgroundResource(R.drawable.anim_shops_about);
             holder.description.setMaxLines(4);
@@ -176,14 +174,13 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
 
 
         }
-        holder.animation= (AnimationDrawable) holder.shop_about_btn_image.getBackground();
+        holder.animation = (AnimationDrawable) holder.shop_about_btn_image.getBackground();
         holder.animation.setOneShot(true);
 
         holder.shop_about_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.shop_about.getVisibility()==View.VISIBLE)
-                {
+                if (holder.shop_about.getVisibility() == View.VISIBLE) {
                     holder.animation.stop();
                     holder.animation.start();
                     holder.shop_about.setVisibility(View.GONE);
@@ -191,23 +188,22 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
                     holder.description.setEllipsize(TextUtils.TruncateAt.END);
                     Shopslist.get(position).setPosition_about(false);
 
-                }
-                else {
+                } else {
                     holder.animation.stop();
                     holder.animation.start();
                     holder.shop_about.setVisibility(View.VISIBLE);
                     TranslateAnimation animate = new TranslateAnimation(
                             0,                 // fromXDelta
                             0,                 // toXDelta
-                            -holder.shop_about.getHeight()/2,  // fromYDelta
+                            -holder.shop_about.getHeight() / 2,  // fromYDelta
                             0);                // toYDelta
                     animate.setDuration(300);
                     holder.shop_about.startAnimation(animate);
                     Shopslist.get(position).setPosition_about(true);
-                    ((AnimationDrawable)( holder.shop_about_btn_image.getBackground())).stop();
+                    ((AnimationDrawable) (holder.shop_about_btn_image.getBackground())).stop();
                     holder.shop_about_btn_image.setBackgroundDrawable(null);
                     holder.shop_about_btn_image.setBackgroundResource(R.drawable.anim_shops_about_revers);
-                    holder.animation= (AnimationDrawable) holder.shop_about_btn_image.getBackground();
+                    holder.animation = (AnimationDrawable) holder.shop_about_btn_image.getBackground();
                     holder.animation.setOneShot(true);
                     holder.description.setMaxLines(100);
                     holder.description.setEllipsize(null);
@@ -217,19 +213,15 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
 
         String shop_inst_link = shop.getInst();
         String shop_tel_number = shop.getTel();
-        if ("null".equals(shop_inst_link) || shop_inst_link==null || "".equals(shop_inst_link)) {
+        if ("null".equals(shop_inst_link) || shop_inst_link == null || "".equals(shop_inst_link)) {
             holder.inst.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             holder.inst.setVisibility(View.VISIBLE);
         }
-        if ("null".equals(shop_tel_number) || shop_tel_number==null || "".equals(shop_tel_number)) {
+        if ("null".equals(shop_tel_number) || shop_tel_number == null || "".equals(shop_tel_number)) {
             holder.phone_number.setVisibility(View.GONE);
             holder.whatsapp.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             holder.phone_number.setVisibility(View.VISIBLE);
             holder.whatsapp.setVisibility(View.VISIBLE);
         }
@@ -238,9 +230,9 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
             @Override
             public void onClick(View view) {
                 Intent intentAiguilleur;
-                String scheme = "http://instagram.com/_u/"+Shopslist.get(position).getInst();
-                String path = "https://instagram.com/"+Shopslist.get(position).getInst();
-                String nomPackageInfo ="com.instagram.android";
+                String scheme = "http://instagram.com/_u/" + Shopslist.get(position).getInst();
+                String path = "https://instagram.com/" + Shopslist.get(position).getInst();
+                String nomPackageInfo = "com.instagram.android";
                 try {
                     context.getPackageManager().getPackageInfo(nomPackageInfo, 0);
                     intentAiguilleur = new Intent(Intent.ACTION_VIEW, Uri.parse(scheme));
@@ -257,12 +249,12 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
                     String number = shop.getTel().replace(" ", "").replace("+", "");
 
                     Intent sendIntent = new Intent("android.intent.action.MAIN");
-                    sendIntent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.Conversation"));
-                    sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(number)+"@s.whatsapp.net");
+                    sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
+                    sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(number) + "@s.whatsapp.net");
                     context.startActivity(sendIntent);
 
-                } catch(Exception e) {
-                    Log.e(TAG, "ERROR_OPEN_MESSANGER"+e.toString());
+                } catch (Exception e) {
+                    Log.e(TAG, "ERROR_OPEN_MESSANGER" + e.toString());
                 }
             }
         });
@@ -274,14 +266,14 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
                 context.startActivity(intent);
             }
         });
-        if (shop.getLocation()==null || "null".equals(shop.getLocation()) ||  "".equals(shop.getLocation()))
+        if (shop.getLocation() == null || "null".equals(shop.getLocation()) || "".equals(shop.getLocation()))
             holder.shop_location_linearLayout.setVisibility(View.GONE);
         else
             holder.shop_location_linearLayout.setVisibility(View.VISIBLE);
         holder.shop_location_linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q="+shop.getLocation());
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + shop.getLocation());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 context.startActivity(mapIntent);
@@ -299,7 +291,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
         return Shopslist.size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView shop_name;
         TextView location;
         TextView description;
@@ -320,16 +312,16 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
             Image = itemView.findViewById(R.id.shop_image);
             location = itemView.findViewById(R.id.shop_location_name);
             shop_name = itemView.findViewById(R.id.shop_name);
-            shop_about_btn=itemView.findViewById(R.id.shop_about_btn);
-            shop_about=itemView.findViewById(R.id.shop_about);
+            shop_about_btn = itemView.findViewById(R.id.shop_about_btn);
+            shop_about = itemView.findViewById(R.id.shop_about);
             shop_about_btn_image = (ImageView) itemView.findViewById(R.id.shop_about_btn_image);
             root_anim = itemView.findViewById(R.id.root_amin);
             description = itemView.findViewById(R.id.shop_description);
-            inst=itemView.findViewById(R.id.shop_inst);
-            whatsapp=itemView.findViewById(R.id.shop_whatsapp);
-            phone_number=itemView.findViewById(R.id.shop_phone);
+            inst = itemView.findViewById(R.id.shop_inst);
+            whatsapp = itemView.findViewById(R.id.shop_whatsapp);
+            phone_number = itemView.findViewById(R.id.shop_phone);
 
-            shop_location_linearLayout=itemView.findViewById(R.id.shop_location);
+            shop_location_linearLayout = itemView.findViewById(R.id.shop_location);
         }
     }
 
