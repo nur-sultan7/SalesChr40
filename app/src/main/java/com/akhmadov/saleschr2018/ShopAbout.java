@@ -28,27 +28,27 @@ public class ShopAbout extends AppCompatActivity {
     boolean inst = true;
     boolean tel = true;
     MainModelView mainModelView;
-  private TextView shopFollow;
-  private boolean isFollowingShop;
-  private String shopId;
-  private String shopName;
+    private TextView shopFollow;
+    private boolean isFollowingShop;
+    private String shopId;
+    private String shopName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_about);
-        mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
+        mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
         TextView shop_name = findViewById(R.id.shop_name);
         TextView shop_description = findViewById(R.id.shop_description);
         TextView shop_location_name = findViewById(R.id.shop_location_name);
-        shopFollow =findViewById(R.id.shop_follow);
+        shopFollow = findViewById(R.id.shop_follow);
         LinearLayout shop_location = findViewById(R.id.shop_location);
         ImageView shop_img = findViewById(R.id.shop_image);
         ImageView shop_phone = findViewById(R.id.shop_phone);
         ImageView shop_inst = findViewById(R.id.shop_inst);
         ImageView shop_whatsapp = findViewById(R.id.shop_whatsapp);
         LinearLayout linearLayout = findViewById(R.id.shop_about);
-        shopId =getIntent().getStringExtra("shop_id");
+        shopId = getIntent().getStringExtra("shop_id");
         final String shop_big_img = getIntent().getStringExtra("shop_img");
         Picasso.get().load(shop_big_img).into(shop_img);
         shop_tel_number = getIntent().getStringExtra("shop_tel");
@@ -56,7 +56,7 @@ public class ShopAbout extends AppCompatActivity {
         if (description != null) {
             shop_description.setText(description.equals("null") ? "Описание отсутствует" : description);
         }
-        shopName=getIntent().getStringExtra("shop_name");
+        shopName = getIntent().getStringExtra("shop_name");
         shop_name.setText(shopName);
         shop_location_str = getIntent().getStringExtra("shop_location");
         if (shop_location_str == null || "null".equals(shop_location_str) || "".equals(shop_location_str))
@@ -106,20 +106,17 @@ public class ShopAbout extends AppCompatActivity {
                 startActivity(mapIntent);
             }
         });
-        isFollowingShop=mainModelView.getFollowingShopById(shopId)!=null;
+        isFollowingShop = mainModelView.getFollowingShopById(shopId) != null;
         checkIsFollowingShop(isFollowingShop);
         shopFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isFollowingShop)
-                {
-                    isFollowingShop=false;
+                if (isFollowingShop) {
+                    isFollowingShop = false;
                     mainModelView.deleteFollowingShop(shopId);
-                }
-                else
-                {
-                    isFollowingShop=true;
-                    mainModelView.insertFollowingShop(new FollowingShop(shopId,shopName,shop_big_img));
+                } else {
+                    isFollowingShop = true;
+                    mainModelView.insertFollowingShop(new FollowingShop(shopId, shopName, shop_big_img));
                 }
                 checkIsFollowingShop(isFollowingShop);
             }
@@ -161,14 +158,13 @@ public class ShopAbout extends AppCompatActivity {
             Log.e(TAG, "ERROR_OPEN_MESSANGER" + e.toString());
         }
     }
-    public void checkIsFollowingShop(boolean isFollowingShop)
-    {
+
+    public void checkIsFollowingShop(boolean isFollowingShop) {
         if (isFollowingShop) {
             shopFollow.setText("Отписаться");
             shopFollow.setBackground(getResources().getDrawable(R.drawable.rouded_red_background_textview));
 
-        }
-        else {
+        } else {
             shopFollow.setText("Подписаться");
             shopFollow.setBackground(getResources().getDrawable(R.drawable.rouded_blue_background_textview));
         }

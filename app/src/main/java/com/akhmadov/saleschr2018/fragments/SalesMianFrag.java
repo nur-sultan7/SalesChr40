@@ -38,7 +38,6 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     private List<Shop> shops;
     private RecyclerView listView;
     private TextView textView_empty;
@@ -52,14 +51,11 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
     private static ProgressBar progressBar;
     private String cat_name;
     private int cat_id;
-
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     ///// Fire Base
-
-
     public SalesMianFrag() {
         // Required empty public constructor
     }
@@ -84,8 +80,6 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Магазины");
         ddd = (AppCompatActivity) getActivity();
-
-
     }
 
     @Override
@@ -93,17 +87,13 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
         super.onStart();
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(cat_name);
-
-
         // progressBar.setVisibility(View.GONE);
     }
 
     public void onResume() {
         super.onResume();
         //  progressBar.setVisibility(View.GONE);
-
     }
-
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
@@ -129,32 +119,22 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
                 return false;
             }
         });
-
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.activity_main_sales, container, false);
-
-
         listView = view.findViewById(R.id.shops_recycler);
         textView_empty = view.findViewById(R.id.empty_view);
-
-
         // adapter = new SalesAdapter(getActivity(),shops);
         // listView.setAdapter(adapter);
-
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.shops_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         progressBar = (ProgressBar) view.findViewById(R.id.shops_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
         // progressBar.setVisibility(View.VISIBLE);
         //  swipeRefreshLayout.setRefreshing(false);
-
         swipeRefreshLayout.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -168,22 +148,18 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
         cat_name = bundle.getString("category_name");
         new RemoteDataTask().execute();
         return view;
-
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
     public void onPageSelected(int position) {
-
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
     }
 
     @Override
@@ -194,14 +170,10 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
 
     // TODO: Rename method, update argument and hook method into UI event
 
-
     public class RemoteDataTask extends AsyncTask<Void, Void, Void> {
         @Override
 
-
         protected Void doInBackground(Void... params) {
-
-
             shops = new ArrayList<>();
             ParseQuery<ParseObject> shops_query = new ParseQuery<ParseObject>(
                     "Shops");
@@ -218,7 +190,6 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
             for (final ParseObject shop_parse : ob) {
                 // Locate images in flag column
                 final Shop shop_4show = new Shop();
-
                 ParseFile imageAsk = (ParseFile) shop_parse.get("shop_image");
                 shop_4show.setImage(imageAsk.getUrl());
                 ParseFile imageAsk2 = (ParseFile) shop_parse.get("shop_big_image");
@@ -231,15 +202,12 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
                 shop_4show.setInst(shop_parse.getString("shop_inst"));
                 shops.add(shop_4show);
             }
-
-
             return null;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             //  progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -259,10 +227,6 @@ public class SalesMianFrag extends Fragment implements ViewPager.OnPageChangeLis
                 adapter = new SalesAdapter(getActivity(), shops);
                 listView.setAdapter(adapter);
             }
-
         }
-
     }
-
-
 }
