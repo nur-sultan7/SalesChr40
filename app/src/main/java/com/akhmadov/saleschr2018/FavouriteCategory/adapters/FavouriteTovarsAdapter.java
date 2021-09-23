@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovarsAdapter.ViewHolder> {
-    private List<Tovar> favouriteTovarsList=new ArrayList<>();
+    private List<Tovar> favouriteTovarsList = new ArrayList<>();
 
     private OnLikeClickListener onLikeClickListener;
     private OnUnLikeClickListener onUnLikeClickListener;
@@ -43,6 +43,7 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
     public void setOnUnLikeClickListener(OnUnLikeClickListener onUnLikeClickListener) {
         this.onUnLikeClickListener = onUnLikeClickListener;
     }
+
     public interface OnLikeClickListener {
         void onClick(int position);
     }
@@ -50,9 +51,9 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
     public interface OnUnLikeClickListener {
         void onClick(int position);
     }
-    public interface OnItemClickListener
-    {
-        void onClick(View view,ImageView imageView, int position, String currentImage);
+
+    public interface OnItemClickListener {
+        void onClick(View view, ImageView imageView, int position, String currentImage);
     }
 
     @NonNull
@@ -71,7 +72,7 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
         holder.tovar_name.setText(tovar.getName());
         Picasso.get()
                 .load(tovar.getImage())
-               // .resize(devicew, deviceh)
+                // .resize(devicew, deviceh)
                 //.centerCrop()
                 .into(holder.tovar_image);
         holder.old_cena.setText(tovar.getOld_cena());
@@ -125,12 +126,11 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
         return favouriteTovarsList.size();
     }
 
-    public Tovar getItemByPosition(int position)
-    {
+    public Tovar getItemByPosition(int position) {
         return favouriteTovarsList.get(position);
     }
-    public void deleteByPosition(int position)
-    {
+
+    public void deleteByPosition(int position) {
         favouriteTovarsList.remove(position);
         notifyItemRemoved(position);
     }
@@ -177,13 +177,11 @@ public class FavouriteTovarsAdapter extends RecyclerView.Adapter<FavouriteTovars
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (onItemClickListener!=null)
-                    {
-                        onItemClickListener.onClick(view, tovar_image,getAdapterPosition(), tovar_image.getDrawable().toString());
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onClick(view, tovar_image, getAdapterPosition(), tovar_image.getDrawable().toString());
                     }
                 }
             });
-
 
 
         }

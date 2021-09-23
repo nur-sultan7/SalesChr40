@@ -32,18 +32,18 @@ public class TovarsCategoriesAdapter extends RecyclerView.Adapter<TovarsCategori
     private ArrayList<Category> Categorieslist = null;
     private ArrayList<Category> arraylist;
     private Filter filter;
-  //  private DBHelper dbHelper;
-   // private SQLiteDatabase db;
-   // private ContentValues cv;
+    //  private DBHelper dbHelper;
+    // private SQLiteDatabase db;
+    // private ContentValues cv;
 
-     TovarsCategoriesAdapter(Context context,
-                             ArrayList<Category> Categorieslist) {
+    TovarsCategoriesAdapter(Context context,
+                            ArrayList<Category> Categorieslist) {
         this.context = context;
         this.Categorieslist = Categorieslist;
         inflater = LayoutInflater.from(context);
         this.arraylist = new ArrayList<>();
         this.arraylist.addAll(Categorieslist);
-       // dbHelper = new DBHelper(context);
+        // dbHelper = new DBHelper(context);
         // db = dbHelper.getWritableDatabase();
 
     }
@@ -51,7 +51,7 @@ public class TovarsCategoriesAdapter extends RecyclerView.Adapter<TovarsCategori
     @Override
     public Filter getFilter() {
 
-        if(filter == null)
+        if (filter == null)
             filter = new CheeseFilter();
         return filter;
     }
@@ -61,8 +61,7 @@ public class TovarsCategoriesAdapter extends RecyclerView.Adapter<TovarsCategori
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater mInflater = LayoutInflater.from(context);
-        view =  mInflater.inflate(R.layout.tovars_categories_item,parent, false);
-
+        view = mInflater.inflate(R.layout.tovars_categories_item, parent, false);
 
 
         return new MyViewHolder(view);
@@ -80,7 +79,7 @@ public class TovarsCategoriesAdapter extends RecyclerView.Adapter<TovarsCategori
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, InnerMainTovarsCategories.newInstance(category.getId(),category.getName(),category.getTabs())).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, InnerMainTovarsCategories.newInstance(category.getId(), category.getName(), category.getTabs())).addToBackStack(null).commit();
             }
         });
 
@@ -173,41 +172,37 @@ public class TovarsCategoriesAdapter extends RecyclerView.Adapter<TovarsCategori
         });*/
 
 
+    /* boolean checkFavoriteItem(Tovar checkProduct) {
+          String table = "favorites";
+          String[] columns = {"object_id", "shop_id","shop_name","tovar_name","tovar_image","tovar_big_image","tovar_new_price","tovar_skidka","tovar_old_price"};
+          String selection = "object_id =?";
+          String[] selectionArgs = {checkProduct.getId_tovar()};
+          String groupBy = null;
+          String having = null;
+         // String orderBy = "column3 DESC";
+          String orderBy =null;
+          String limit = null;
+          Cursor c = db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+          boolean check = false;
+          if (c.moveToFirst())
+          {
+              check=true;
+          }
+          c.close();
+          return check;
+      }*/
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView Img;
+        TextView name;
 
 
+        MyViewHolder(View itemView) {
+            super(itemView);
+            Img = itemView.findViewById(R.id.tovars_category_img);
+            name = itemView.findViewById(R.id.tovars_category_name);
 
-  /* boolean checkFavoriteItem(Tovar checkProduct) {
-        String table = "favorites";
-        String[] columns = {"object_id", "shop_id","shop_name","tovar_name","tovar_image","tovar_big_image","tovar_new_price","tovar_skidka","tovar_old_price"};
-        String selection = "object_id =?";
-        String[] selectionArgs = {checkProduct.getId_tovar()};
-        String groupBy = null;
-        String having = null;
-       // String orderBy = "column3 DESC";
-        String orderBy =null;
-        String limit = null;
-        Cursor c = db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
-        boolean check = false;
-        if (c.moveToFirst())
-        {
-            check=true;
         }
-        c.close();
-        return check;
-    }*/
-  static class MyViewHolder extends RecyclerView.ViewHolder{
-      ImageView Img;
-      TextView name;
-
-
-
-      MyViewHolder(View itemView) {
-          super(itemView);
-          Img=itemView.findViewById(R.id.tovars_category_img);
-          name=itemView.findViewById(R.id.tovars_category_name);
-
-      }
-  }
+    }
 
 }
 

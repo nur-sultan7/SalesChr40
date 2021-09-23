@@ -68,15 +68,13 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
         }
     }
 
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem searchViewItem = menu.findItem(R.id.action_search);
         MenuItem infoItem = menu.findItem(R.id.action_info);
         MenuItem filterItem = menu.findItem(R.id.action_filter);
         filterItem.setVisible(false);
         infoItem.setVisible(false);
-
 
 
         final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
@@ -100,12 +98,12 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view =inflater.inflate(R.layout.activity_main_tovars, container, false);
+        View view = inflater.inflate(R.layout.activity_main_tovars, container, false);
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Товары");
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.tovars_category_swipe_refresh);
-        swipeRefreshLayout.setOnRefreshListener( this);
-        progressBar = (ProgressBar) view.findViewById(R.id.tovars_category_progressBar) ;
+        swipeRefreshLayout.setOnRefreshListener(this);
+        progressBar = (ProgressBar) view.findViewById(R.id.tovars_category_progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
 
@@ -115,11 +113,10 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
                                         swipeRefreshLayout.setRefreshing(false);
 
 
-
                                     }
                                 }
         );
-        listView=  view.findViewById(R.id.tovars_category_recycler_view);
+        listView = view.findViewById(R.id.tovars_category_recycler_view);
         new RemoteDataTask().execute();
 
         return view;
@@ -154,7 +151,6 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
         protected Void doInBackground(Void... params) {
 
 
-
             categories = new ArrayList<>();
 
             categories_query = new ParseQuery<ParseObject>(
@@ -174,7 +170,7 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
                 category.setName(category_parse.getString("name"));
                 category.setId(category_parse.getObjectId());
                 category.setRoot(category_parse.getString("root"));
-                category.setTabs( category_parse.<String>getList("tabs"));
+                category.setTabs(category_parse.<String>getList("tabs"));
                 categories.add(category);
             }
             /*ValueEventListener valueEventListener = new ValueEventListener() {
@@ -205,7 +201,6 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
             query.addListenerForSingleValueEvent(valueEventListener);*/
 
 
-
             return null;
         }
 
@@ -223,7 +218,7 @@ public class TavarsCategories extends Fragment implements ViewPager.OnPageChange
             // Pass the results into ListViewAdapter.java
             //
             progressBar.setVisibility(View.GONE);
-            adapter = new TovarsCategoriesAdapter(getActivity(),  categories);
+            adapter = new TovarsCategoriesAdapter(getActivity(), categories);
             listView.setLayoutManager(new LinearLayoutManager(getContext()));
             //listView.addItemDecoration( new LayoutMarginDecoration( 2, 10 ) );
 
