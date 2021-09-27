@@ -25,7 +25,7 @@ public class PhotoView extends AppCompatActivity {
     PhotoViewViewPageAdapter adapter;
     List<String> images;
     TextView pages_nomber;
-   static String image_drawable;
+    static String image_drawable;
     static String big_image_drawable;
     ImageView imageClose;
 //   ImageLoader_image_message imageLoader =new ImageLoader_image_message(this);
@@ -37,10 +37,12 @@ public class PhotoView extends AppCompatActivity {
 
     public static void setImage_drawable(String image_draweble, String big_image_drawable) {
         PhotoView.image_drawable = image_draweble;
-        PhotoView.big_image_drawable=big_image_drawable;
-    }public static void setImage_drawable( String big_image_drawable) {
+        PhotoView.big_image_drawable = big_image_drawable;
+    }
 
-        PhotoView.big_image_drawable=big_image_drawable;
+    public static void setImage_drawable(String big_image_drawable) {
+
+        PhotoView.big_image_drawable = big_image_drawable;
     }
 
 
@@ -48,41 +50,42 @@ public class PhotoView extends AppCompatActivity {
     uk.co.senab.photoview.PhotoView image_view2;
 
     PhotoViewAttacher photo_view;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photoview_viewpager);
-        this_class=this;
+        this_class = this;
         pages_nomber = findViewById(R.id.photoView_viewpage_pages_nomber);
         imageClose = findViewById(R.id.photoView_viewpage_close);
 
         Intent intent = getIntent();
         images = new ArrayList<>();
-        if (intent.getExtras().getString("image1")!=null)
+        if (intent.getExtras().getString("image1") != null)
             images.add(intent.getExtras().getString("image1"));
-        if (intent.getExtras().getString("image2")!=null)
+        if (intent.getExtras().getString("image2") != null)
             images.add(intent.getExtras().getString("image2"));
-        if (intent.getExtras().getString("image3")!=null)
+        if (intent.getExtras().getString("image3") != null)
             images.add(intent.getExtras().getString("image3"));
-        adapter = new PhotoViewViewPageAdapter(images,this);
+        adapter = new PhotoViewViewPageAdapter(images, this);
         viewPager = findViewById(R.id.photoView_viewpage);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(0,0,0,0);
+        viewPager.setPadding(0, 0, 0, 0);
         viewPager.setCurrentItem(intent.getExtras().getInt("position"));
-        String nomber = intent.getExtras().getInt("position")+1+" фото из "+images.size();
+        String nomber = intent.getExtras().getInt("position") + 1 + " фото из " + images.size();
         pages_nomber.setText(nomber);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position<(adapter.getCount()-1)){
+                if (position < (adapter.getCount() - 1)) {
 
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-               // toggleArrowVisibility(position == 0, position == images.size() - 1);
-                String nomber = (position+1)+" фото из "+images.size();
+                // toggleArrowVisibility(position == 0, position == images.size() - 1);
+                String nomber = (position + 1) + " фото из " + images.size();
                 pages_nomber.setText(nomber);
             }
 
@@ -98,9 +101,6 @@ public class PhotoView extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
 
 
     }
@@ -121,7 +121,7 @@ public class PhotoView extends AppCompatActivity {
         protected void onPostExecute(Void result) {
 
 
-           // mAttacher = new PhotoViewAttacher(image_view);
+            // mAttacher = new PhotoViewAttacher(image_view);
         }
     }
 }
