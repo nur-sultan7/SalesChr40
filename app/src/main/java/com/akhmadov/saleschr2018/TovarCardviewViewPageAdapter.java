@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class TovarCardviewViewPageAdapter  extends PagerAdapter {
+public class TovarCardviewViewPageAdapter extends PagerAdapter {
     private List<String> images;
     private LayoutInflater layoutInflater;
     private Context context;
@@ -29,15 +29,15 @@ public class TovarCardviewViewPageAdapter  extends PagerAdapter {
     private final int devicew;
 
 
-    public TovarCardviewViewPageAdapter(List<String> images,String tovar_image, Context context) {
+    public TovarCardviewViewPageAdapter(List<String> images, String tovar_image, Context context) {
         this.images = images;
         this.context = context;
-        this.tovar_image =tovar_image;
+        this.tovar_image = tovar_image;
 
-         displaymetrics = new DisplayMetrics();
+        displaymetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-         deviceh = (int) (displaymetrics.heightPixels / 2.25);
-         devicew =  (displaymetrics.widthPixels);
+        deviceh = (int) (displaymetrics.heightPixels / 2.25);
+        devicew = (displaymetrics.widthPixels);
     }
 
     @Override
@@ -54,11 +54,10 @@ public class TovarCardviewViewPageAdapter  extends PagerAdapter {
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
         layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.activity_tovar_cardview_images,container,false);
+        View view = layoutInflater.inflate(R.layout.activity_tovar_cardview_images, container, false);
         final ImageView imageView = view.findViewById(R.id.tovar_cardview_image);
 
-        if (position==0)
-        {
+        if (position == 0) {
             Picasso.get()
                     .load(tovar_image)
                     .noPlaceholder()
@@ -66,45 +65,44 @@ public class TovarCardviewViewPageAdapter  extends PagerAdapter {
                     .resize(devicew, deviceh)
                     .centerCrop()
                     .into(imageView, new Callback() {
-            @Override
-            public void onSuccess() {
-                    Picasso.get()
-                            .load(images.get(position))
-                            .noPlaceholder()
-                            .resize(devicew, deviceh)
-                            .centerCrop()
-                            .into(imageView);
-            }
+                        @Override
+                        public void onSuccess() {
+                            Picasso.get()
+                                    .load(images.get(position))
+                                    .noPlaceholder()
+                                    .resize(devicew, deviceh)
+                                    .centerCrop()
+                                    .into(imageView);
+                        }
 
                         @Override
                         public void onError(Exception e) {
 
                         }
 
-        });
+                    });
 
 
-        }
-        else {
+        } else {
 
             Picasso.get()
                     .load(images.get(position))
                     .into(imageView);
         }
         container.addView(view, 0);
-       imageView.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //PhotoView.setImage_drawable(images.get(position));
                 Intent intent = new Intent(context, PhotoView.class);
-                if (images.size()>=1)
-                intent.putExtra("image1",images.get(0));
-                if (images.size()>=2)
-                intent.putExtra("image2",images.get(1));
-                if (images.size()==3)
-                intent.putExtra("image3",images.get(2));
-                intent.putExtra("position",position);
-                intent.putExtra("size",images.size());
+                if (images.size() >= 1)
+                    intent.putExtra("image1", images.get(0));
+                if (images.size() >= 2)
+                    intent.putExtra("image2", images.get(1));
+                if (images.size() == 3)
+                    intent.putExtra("image3", images.get(2));
+                intent.putExtra("position", position);
+                intent.putExtra("size", images.size());
 
 
                 context.startActivity(intent);
