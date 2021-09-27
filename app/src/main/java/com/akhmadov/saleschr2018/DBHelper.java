@@ -11,6 +11,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     final String LOG_TAG = "myLogs";
+
     public DBHelper(Context context) {
         // конструктор суперкласса
         super(context, "salesChrDB", null, 1);
@@ -19,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(LOG_TAG, "--- onCreate database ---");
-       // Log.d( "--- onCreate database ---");
+        // Log.d( "--- onCreate database ---");
         // создаем таблицу с полями
         db.execSQL("create table favorites ("
                 + "id integer primary key autoincrement,"
@@ -33,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "tovar_new_price text,"
                 + "tovar_skidka text,"
                 + "tovar_old_price text"
-                 + ");");
+                + ");");
     }
 
     @Override
