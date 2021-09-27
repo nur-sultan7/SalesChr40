@@ -35,7 +35,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRefreshListener  {
+public class CategoryTovars extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private CategoryTovarsAdapter adapter;
@@ -44,16 +44,15 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
     private static List<ParseObject> ob;
     private List<Tovar> tovars;
     private ProgressBar progressBar;
-    private  boolean isfollowing;
+    private boolean isfollowing;
     private String cat_id;
     private String cat_name;
-    private int limit=16;
-    private int skip=0;
-    private int orderBy=0;
+    private int limit = 16;
+    private int skip = 0;
+    private int orderBy = 0;
     private DialogFilter filter_dialog;
-    private String search_str="";
+    private String search_str = "";
     private MainModelView mainModelView;
-
 
 
     public static Fragment newInstance(String cat_id, String cat_name) {
@@ -70,15 +69,14 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         if (getArguments() != null) {
-          cat_id=getArguments().getString("cat_id");
-          cat_name=getArguments().getString("cat_name");
+            cat_id = getArguments().getString("cat_id");
+            cat_name = getArguments().getString("cat_name");
         }
-        filter_dialog=new DialogFilter(requireContext());
-        mainModelView= ViewModelProviders.of(this).get(MainModelView.class);
+        filter_dialog = new DialogFilter(requireContext());
+        mainModelView = ViewModelProviders.of(this).get(MainModelView.class);
     }
 
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem searchViewItem = menu.findItem(R.id.action_search);
         final MenuItem infoViewItem = menu.findItem(R.id.action_info);
@@ -92,9 +90,10 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                 searchViewAndroidActionBar.clearFocus();
                 return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                search_str=newText;
+                search_str = newText;
                 if (!search_str.equals(""))
                     new RemoteDataTask().execute(orderBy);
                 return false;
@@ -103,27 +102,28 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
         MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-               // filterViewItem.setVisible(false);
+                // filterViewItem.setVisible(false);
 
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-               // filterViewItem.setVisible(true);
-                search_str="";
+                // filterViewItem.setVisible(true);
+                search_str = "";
                 new RemoteDataTask().execute(orderBy);
                 return true;
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case R.id.action_info:
                 break;
-            case  R.id.action_filter:
+            case R.id.action_filter:
                 filter_dialog.showDialogFilter();
                 filter_dialog.checkChoice(orderBy);
                 filter_dialog.price_asc.setOnClickListener(new View.OnClickListener() {
@@ -140,14 +140,14 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                         filter_dialog.dismiss();
                     }
                 });
-               filter_dialog.skidka.setOnClickListener(new View.OnClickListener() {
+                filter_dialog.skidka.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         new RemoteDataTask().execute(3);
                         filter_dialog.dismiss();
                     }
                 });
-               filter_dialog.by_new.setOnClickListener(new View.OnClickListener() {
+                filter_dialog.by_new.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         new RemoteDataTask().execute(0);
@@ -156,7 +156,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                 });
                 break;
             default:
-                    return true;
+                return true;
 
 
         }
@@ -167,8 +167,8 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =inflater.inflate(R.layout.all_tovars_recycler, container, false);
-        progressBar = view.findViewById(R.id.tovars_fragment_progressBar) ;
+        View view = inflater.inflate(R.layout.all_tovars_recycler, container, false);
+        progressBar = view.findViewById(R.id.tovars_fragment_progressBar);
         progressBar.setVisibility(View.VISIBLE);
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         //cat_name=getArguments().getString("cat_name");
@@ -183,10 +183,10 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                                     }
                                 }
         );
-        recyclerView= view.findViewById(R.id.tovars_recyclerview);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity() , 2));
+        recyclerView = view.findViewById(R.id.tovars_recyclerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         //listView.addItemDecoration( new LayoutMarginDecoration( 2, 10 ) );
-        adapter = new CategoryTovarsAdapter(mainModelView,recyclerView,this.getContext());
+        adapter = new CategoryTovarsAdapter(mainModelView, recyclerView, this.getContext());
         adapter.setFromCategory(1);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemViewCacheSize(12);
@@ -218,26 +218,26 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
     public class RemoteDataTask extends AsyncTask<Integer, Void, Void> {
         @Override
         protected Void doInBackground(Integer... params) {
-            isfollowing=false;
-            skip=0;
-            orderBy=params[0];
+            isfollowing = false;
+            skip = 0;
+            orderBy = params[0];
             tovars = new ArrayList<>();
             tovars_query = new ParseQueryTovars(
                     "Tovars");
             if (!search_str.equals("")) {
-                tovars_query.whereMatches("tovar_opisanie",search_str,"i");
+                tovars_query.whereMatches("tovar_opisanie", search_str, "i");
                 ParseQueryTovars parseQueryTovars = new ParseQueryTovars("Tovars");
-                parseQueryTovars.whereMatches("tovar_name",search_str,"i");
-                ParseQuery mainQuery = tovars_query.setMultipleQuery(parseQueryTovars,orderBy);
+                parseQueryTovars.whereMatches("tovar_name", search_str, "i");
+                ParseQuery mainQuery = tovars_query.setMultipleQuery(parseQueryTovars, orderBy);
                 mainQuery.include("shop_object");
                 mainQuery.setLimit(limit);
-                mainQuery.whereContains("cat_id",cat_id);
-                try
-                { ob=mainQuery.find(); }
-                catch (ParseException e)
-                { e.printStackTrace(); }
-            }
-            else {
+                mainQuery.whereContains("cat_id", cat_id);
+                try {
+                    ob = mainQuery.find();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
                 tovars_query.setOrderBy(orderBy);
                 tovars_query.whereContains("cats_id", cat_id);
                 tovars_query.include("shop_object");
@@ -248,7 +248,7 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                     e1.printStackTrace();
                 }
             }
-           tovars= ParseLoad.RetrievingTovars(ob);
+            tovars = ParseLoad.RetrievingTovars(ob);
             return null;
         }
 
@@ -266,49 +266,50 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
             layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    int type=adapter.getItemViewType(position);
+                    int type = adapter.getItemViewType(position);
                     if (type == 0)
                         return 2;
                     else
                         return 1;
                 }
             });
-            if (tovars.size()<=8)
-            {
+            if (tovars.size() <= 8) {
                 adapter.setIsloading(true);
             }
             adapter.setLoadMore(new ILoadMore() {
                 @Override
                 public void MoreLoad() {
                     tovars.add(null);
-                    adapter.notifyItemChanged(tovars.size()-1);
+                    adapter.notifyItemChanged(tovars.size() - 1);
                     new RemoteOnLoad().execute();
                 }
             });
         }
     }
+
     public class RemoteOnLoad extends AsyncTask<Void, Void, Void> {
-        private int itemStart=0;
-        private int itemsCount=0;
+        private int itemStart = 0;
+        private int itemsCount = 0;
+
         @Override
         protected Void doInBackground(Void... voids) {
-            skip+=limit;
+            skip += limit;
             tovars_query = new ParseQueryTovars(
                     "Tovars");
             if (!search_str.equals("")) {
-                tovars_query.whereMatches("tovar_opisanie",search_str,"i");
+                tovars_query.whereMatches("tovar_opisanie", search_str, "i");
                 ParseQueryTovars parseQueryTovars = new ParseQueryTovars("Tovars");
-                parseQueryTovars.whereMatches("tovar_name",search_str,"i");
-                ParseQuery mainQuery = tovars_query.setMultipleQuery(parseQueryTovars,orderBy);
+                parseQueryTovars.whereMatches("tovar_name", search_str, "i");
+                ParseQuery mainQuery = tovars_query.setMultipleQuery(parseQueryTovars, orderBy);
                 mainQuery.include("shop_object");
                 mainQuery.setLimit(limit);
-                mainQuery.whereContains("cat_id",cat_id);
-                try
-                { ob=mainQuery.find(); }
-                catch (ParseException e)
-                { e.printStackTrace(); }
-            }
-            else {
+                mainQuery.whereContains("cat_id", cat_id);
+                try {
+                    ob = mainQuery.find();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
                 tovars_query.whereContains("cats_id", cat_id);
                 tovars_query.include("shop_object");
                 tovars_query.setOrderBy(orderBy);
@@ -320,8 +321,8 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
                     e1.printStackTrace();
                 }
             }
-            itemStart=tovars.size()-1;
-            itemsCount=ob.size();
+            itemStart = tovars.size() - 1;
+            itemsCount = ob.size();
             tovars.remove(itemStart);
             tovars.addAll(ParseLoad.RetrievingTovars(ob));
 
@@ -330,9 +331,9 @@ public class CategoryTovars extends Fragment implements  SwipeRefreshLayout.OnRe
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            adapter.notifyItemRangeChanged(itemStart,itemsCount);
-            if (itemsCount<limit)
-            adapter.setIsloading(true);
+            adapter.notifyItemRangeChanged(itemStart, itemsCount);
+            if (itemsCount < limit)
+                adapter.setIsloading(true);
             else
                 adapter.setIsloading(false);
         }
